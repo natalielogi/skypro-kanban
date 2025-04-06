@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Column from "../Column/Column";
 import { cardList } from "../../data";
 
@@ -11,10 +11,23 @@ const columnTitles = [
 ];
 
 const Main = () => {
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false)
+    }, 2000)
+
+    return () => clearTimeout(timer)
+  }, [])
+
   return (
     <main className="main">
       <div className="container">
-        <div className="main__block">
+        {loading ? (
+          <div className="loading">Данные загружаются</div>
+        ): (
+          <div className="main__block">
           <div className="main__content">
             {columnTitles.map((title) => (
               <Column
@@ -25,6 +38,7 @@ const Main = () => {
             ))}
           </div>
         </div>
+        )}
       </div>
     </main>
   );
