@@ -786,10 +786,9 @@ body {
   padding: 0;
 }
 .header__pop-user-set {
-  display: none;
   position: absolute;
   top: 61px;
-  right: 248px;
+  right: 0;
   width: 213px;
   height: 205px;
   border-radius: 10px;
