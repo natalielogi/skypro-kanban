@@ -43,6 +43,15 @@ body {
   color: #000000;
 }
 
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Или задайте нужную высоту контейнера */
+  font-size: 24px;
+  color: #333;
+}
+
 .wrapper {
   max-width: 100%;
   width: 100vw;
@@ -777,7 +786,6 @@ body {
   padding: 0;
 }
 .header__pop-user-set {
-  display: none;
   position: absolute;
   top: 61px;
   right: 0;

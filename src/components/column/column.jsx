@@ -1,16 +1,22 @@
-import React from 'react';
-import Card from '../Card/Card';
+import React from "react";
+import Card from "../Card/Card";
 
-const Column = ({ title }) => {
+const Column = ({ title, cards }) => {
   return (
     <div className="main__column">
       <div className="column__title">
         <p>{title}</p>
       </div>
       <div className="cards">
-        {/* Пример: выводим несколько карточек */}
-        <Card theme="orange" title="Название задачи" date="30.10.23" />
-        <Card theme="green" title="Название задачи" date="30.10.23" />
+        {cards.map((card) => (
+          <Card
+            key={card.id}
+            topic={card.topic}
+            title={card.title}
+            date={card.date}
+            status={card.status}
+          />
+        ))}
       </div>
     </div>
   );

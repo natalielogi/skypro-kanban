@@ -1,22 +1,17 @@
-import React from 'react';
+import React from "react";
 
-const Card = ({ theme, title, date }) => {
-  const themeClass = theme ? `_${theme}` : '';
-  const themeText =
-    theme === 'orange'
-      ? 'Web Design'
-      : theme === 'green'
-      ? 'Research'
-      : theme === 'purple'
-      ? 'Copywriting'
-      : '';
-      
+const Card = ({ topic, title, date }) => {
+  let topicClass = "";
+  if (topic === "Web Design") topicClass = "orange";
+  else if (topic === "Research") topicClass = "green";
+  else if (topic === "Copywriting") topicClass = "purple";
+
   return (
     <div className="cards__item">
       <div className="cards__card card">
         <div className="card__group">
-          <div className={`card__theme ${themeClass}`}>
-            <p className={themeClass}>{themeText}</p>
+          <div className={`card__theme _${topicClass}`}>
+            <p>{topic}</p>
           </div>
           <a href="#popBrowse" target="_self">
             <div className="card__btn">

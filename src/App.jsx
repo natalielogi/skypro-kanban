@@ -12,7 +12,6 @@ function App() {
       {/* Модальные окна */}
       <PopBrowse />
       <PopNewCard />
-      <PopUser />
       {/* Основной контент */}
       <Header />
       <Main />
