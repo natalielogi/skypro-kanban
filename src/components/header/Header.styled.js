@@ -11,6 +11,11 @@ export const Container = styled.div`
   width: 100%;
   margin: 0 auto;
   padding: 0 30px;
+
+  @media screen and (max-width: 495px) {
+    width: 100%;
+    padding: 0 16px;
+  }
 `;
 
 export const HeaderBlock = styled.div`
@@ -64,6 +69,18 @@ export const BtnMainNew = styled.button`
 
   &:hover {
     background-color: #33399b;
+  }
+
+  @media screen and (max-width: 495px) {
+    z-index: 3;
+    position: fixed;
+    left: 16px;
+    bottom: 30px;
+    top: auto;
+    width: calc(100vw - 32px);
+    height: 40px;
+    border-radius: 4px;
+    margin-right: 0;
   }
 `;
 
