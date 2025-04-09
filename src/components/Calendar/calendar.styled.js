@@ -123,22 +123,17 @@ export const CalendarCell = styled.div`
   line-height: 1;
   letter-spacing: -0.2px;
   cursor: pointer;
+  opacity: ${({ $otherMonth }) => $otherMonth && 0};
+
+  &:hover {
+    color: ${({ $cellDay }) => $cellDay && "#94a6be"};
+    background-color: ${({ $cellDay }) => $cellDay && "#eaeef6"};
+  }
 
   @media screen and (max-width: 660px) {
     width: 42px;
     height: 42px;
     font-size: 14px;
-  }
-`;
-
-export const MonthCell = styled(CalendarCell)`
-  opacity: 0;
-`;
-
-export const CellDay = styled(CalendarCell)`
-  &:hover {
-    color: #94a6be;
-    background-color: #eaeef6;
   }
 `;
 

@@ -11,8 +11,7 @@ import {
   DayNames,
   DayName,
   CalendarCells,
-  MonthCell,
-  CellDay,
+  CalendarCell,
   CalendarPeriod,
   CalendarP,
 } from "./calendar.styled";
@@ -59,14 +58,14 @@ const Calendar = () => {
           </DayNames>
           <CalendarCells>
             {/* Пример ячеек календаря */}
-            <MonthCell>28</MonthCell>
-            <MonthCell>29</MonthCell>
-            <MonthCell>30</MonthCell>
-            <CellDay>31</CellDay>
-            <CellDay>1</CellDay>
-            <CellDay>2</CellDay>
-            <CellDay>3</CellDay>
-            <CellDay>4</CellDay>
+            <CalendarCell $otherMonth>28</CalendarCell>
+            <CalendarCell $otherMonth>29</CalendarCell>
+            <CalendarCell $otherMonth>30</CalendarCell>
+            <CalendarCell $cellDay>31</CalendarCell>
+            <CalendarCell $cellDay>1</CalendarCell>
+            <CalendarCell $cellDay>2</CalendarCell>
+            <CalendarCell $cellDay>3</CalendarCell>
+            <CalendarCell $cellDay>4</CalendarCell>
             {/* ... остальные ячейки ... */}
           </CalendarCells>
         </CalendarContent>
