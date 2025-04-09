@@ -1,5 +1,15 @@
 import React, { useState, useRef, useEffect } from "react";
 import PopUser from "../popups/PopUser/PopUser";
+import {
+  Headerwrapper,
+  Container,
+  HeaderBlock,
+  LogoLinkLight,
+  LogoLinkDark,
+  Nav,
+  BtnMainNew,
+  UserLink,
+} from "./Header.styled";
 
 const Header = () => {
   const [isUserVisible, setIsUserVisible] = useState(false);
@@ -31,37 +41,27 @@ const Header = () => {
   }, [isUserVisible]);
 
   return (
-    <header className="header">
-      <div className="container">
-        <div className="header__block">
-          <div className="header__logo _show _light">
-            <a href="" target="_self">
-              <img src="images/logo.png" alt="logo" />
-            </a>
-          </div>
-          <div className="header__logo _dark">
-            <a href="" target="_self">
-              <img src="images/logo_dark.png" alt="logo" />
-            </a>
-          </div>
-          <nav className="header__nav">
-            <button className="header__btn-main-new _hover01" id="btnMainNew">
+    <Headerwrapper>
+      <Container>
+        <HeaderBlock>
+          <LogoLinkLight href="" target="_self">
+            <img src="images/logo.png" alt="logo" />
+          </LogoLinkLight>
+          <LogoLinkDark href="" target="_self">
+            <img src="images/logo_dark.png" alt="logo" />
+          </LogoLinkDark>
+          <Nav>
+            <BtnMainNew id="btnMainNew">
               <a href="#popNewCard">Создать новую задачу</a>
-            </button>
-            <a
-              href="#user-set-target"
-              className="header__user _hover02"
-              onClick={toggleUserModal}
-            >
+            </BtnMainNew>
+            <UserLink href="#user-set-target" onClick={toggleUserModal}>
               Ivan Ivanov
-            </a>
-            {isUserVisible && (
-            <PopUser ref={modalref} onClose={closeModal} />
-            )}
-          </nav>
-        </div>
-      </div>
-    </header>
+            </UserLink>
+            {isUserVisible && <PopUser ref={modalref} onClose={closeModal} />}
+          </Nav>
+        </HeaderBlock>
+      </Container>
+    </Headerwrapper>
   );
 };
 

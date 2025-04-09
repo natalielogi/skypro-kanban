@@ -1,13 +1,14 @@
 import React from "react";
 import Card from "../Card/Card";
+import { MainColumn, ColumnTitle, CardsWrapper } from "./column.styled";
 
 const Column = ({ title, cards }) => {
   return (
-    <div className="main__column">
-      <div className="column__title">
+    <MainColumn>
+      <ColumnTitle>
         <p>{title}</p>
-      </div>
-      <div className="cards">
+      </ColumnTitle>
+      <CardsWrapper>
         {cards.map((card) => (
           <Card
             key={card.id}
@@ -17,8 +18,8 @@ const Column = ({ title, cards }) => {
             status={card.status}
           />
         ))}
-      </div>
-    </div>
+      </CardsWrapper>
+    </MainColumn>
   );
 };
 
