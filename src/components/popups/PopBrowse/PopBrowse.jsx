@@ -1,5 +1,5 @@
-import React from 'react';
-import Calendar from '../../Calendar/Calendar';
+import React from "react";
+import Calendar from "../../calendar/calendar";
 
 const PopBrowse = () => {
   return (
@@ -34,9 +34,15 @@ const PopBrowse = () => {
               </div>
             </div>
             <div className="pop-browse__wrap">
-              <form className="pop-browse__form form-browse" id="formBrowseCard" action="#">
+              <form
+                className="pop-browse__form form-browse"
+                id="formBrowseCard"
+                action="#"
+              >
                 <div className="form-browse__block">
-                  <label htmlFor="textArea01" className="subttl">Описание задачи</label>
+                  <label htmlFor="textArea01" className="subttl">
+                    Описание задачи
+                  </label>
                   <textarea
                     className="form-browse__area"
                     name="text"
@@ -75,7 +81,10 @@ const PopBrowse = () => {
                 <button className="btn-edit__edit _btn-bor _hover03">
                   <a href="#">Отменить</a>
                 </button>
-                <button className="btn-edit__delete _btn-bor _hover03" id="btnDelete">
+                <button
+                  className="btn-edit__delete _btn-bor _hover03"
+                  id="btnDelete"
+                >
                   <a href="#">Удалить задачу</a>
                 </button>
               </div>

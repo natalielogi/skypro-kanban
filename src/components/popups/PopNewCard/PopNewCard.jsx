@@ -1,5 +1,5 @@
-import React from 'react';
-import Calendar from '../../Calendar/Calendar';
+import React from "react";
+import Calendar from "../../calendar/calendar";
 
 const PopNewCard = () => {
   return (
@@ -8,11 +8,19 @@ const PopNewCard = () => {
         <div className="pop-new-card__block">
           <div className="pop-new-card__content">
             <h3 className="pop-new-card__ttl">Создание задачи</h3>
-            <a href="#" className="pop-new-card__close">&#10006;</a>
+            <a href="#" className="pop-new-card__close">
+              &#10006;
+            </a>
             <div className="pop-new-card__wrap">
-              <form className="pop-new-card__form form-new" id="formNewCard" action="#">
+              <form
+                className="pop-new-card__form form-new"
+                id="formNewCard"
+                action="#"
+              >
                 <div className="form-new__block">
-                  <label htmlFor="formTitle" className="subttl">Название задачи</label>
+                  <label htmlFor="formTitle" className="subttl">
+                    Название задачи
+                  </label>
                   <input
                     className="form-new__input"
                     type="text"
@@ -23,7 +31,9 @@ const PopNewCard = () => {
                   />
                 </div>
                 <div className="form-new__block">
-                  <label htmlFor="textArea" className="subttl">Описание задачи</label>
+                  <label htmlFor="textArea" className="subttl">
+                    Описание задачи
+                  </label>
                   <textarea
                     className="form-new__area"
                     name="text"
