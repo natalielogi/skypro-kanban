@@ -18,22 +18,17 @@ import {
 
 const Calendar = () => {
   const daysInMonth = 30;
-  const startDay = 5; // 1 сентября 2023 - пятница (0 - воскресенье, 1 - понедельник и т.д.)
-
-  // Создаем массив дней
+  const startDay = 5; 
   const days = [];
 
-  // Добавляем дни предыдущего месяца
   for (let i = 0; i < startDay; i++) {
     days.push({ day: 31 - (startDay - i - 1), otherMonth: true });
   }
 
-  // Добавляем дни текущего месяца
   for (let i = 1; i <= daysInMonth; i++) {
     days.push({ day: i, otherMonth: false });
   }
 
-  // Добавляем дни следующего месяца, чтобы заполнить последнюю неделю
   const remainingDays = 7 - (days.length % 7);
   if (remainingDays < 7) {
     for (let i = 1; i <= remainingDays; i++) {

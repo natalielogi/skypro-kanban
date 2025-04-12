@@ -11,16 +11,11 @@ import {
 } from "./card.styled"
 
 const Card = ({ topic, title, date }) => {
-  let topicClass = "";
-  if (topic === "Web Design") topicClass = "orange";
-  else if (topic === "Research") topicClass = "green";
-  else if (topic === "Copywriting") topicClass = "purple";
-
   return (
     <CardWrapper>
       <Cards>
         <CardGroup>
-          <CardTheme $variant={topicClass}>
+          <CardTheme $topic={topic}>
             <p>{topic}</p>
           </CardTheme>
           <a href="#popBrowse" target="_self">

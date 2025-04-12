@@ -40,33 +40,40 @@ export const CardGroup = styled.div`
   justify-content: space-between;
 `;
 
+const topicClass = {
+  "Web Design": {
+    background: "#FFE4C2",
+    color: "#FF6D00",
+  },
+  Research: {
+    background: "#B4FDD1",
+    color: "#06B16E",
+  },
+  Copywriting: {
+    background: "#E9D4FF",
+    color: "#9A48F1",
+  },
+  default: {
+    background: "#eee",
+    color: "#333",
+  },
+};
+
 export const CardTheme = styled.div`
   width: auto;
   height: 20px;
   padding: 5px 14px;
   border-radius: 18px;
 
-  background-color: ${({ $variant }) =>
-    $variant === "orange"
-      ? "#FFE4C2"
-      : $variant === "green"
-      ? "#B4FDD1"
-      : $variant === "purple"
-      ? "#E9D4FF"
-      : "#eee"};
+  background-color: ${({ $topic }) =>
+    topicClass[$topic]?.background || topicClass.default.background};
+  color: ${({ $topic }) =>
+    topicClass[$topic]?.color || topicClass.default.color};
 
   p {
     font-size: 10px;
     font-weight: 600;
     line-height: 10px;
-    color: ${({ $variant }) =>
-      $variant === "orange"
-        ? "#FF6D00"
-        : $variant === "green"
-        ? "#06B16E"
-        : $variant === "purple"
-        ? "#9A48F1"
-        : "#333"};
   }
 `;
 
