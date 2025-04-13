@@ -5,7 +5,8 @@ import AddTaskPage from "../pages/AddTaskPage";
 import ExitModal from "../pages/ExitModal";
 import NotFoundPage from "../pages/NotFoundPage";
 import MainPage from "../pages/MainPage";
-import { Route, Router, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
+import { useState } from "react";
 
 function AppRoutes() {
   const [isAuth, setIsAuth] = useState(false);

@@ -1,5 +1,5 @@
 import React from "react";
-import Calendar from "../../calendar/calendar";
+import Calendar from "../../Calendar/calendar";
 
 const PopBrowse = () => {
   return (
