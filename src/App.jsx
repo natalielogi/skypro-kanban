@@ -1,22 +1,8 @@
-import React from 'react';
-import './App.css';
-import Header from './components/header/Header';
-import Main from './components/main/main';
-import PopBrowse from './components/popups/PopBrowse/PopBrowse';
-import PopNewCard from './components/popups/PopNewCard/PopNewCard';
-import PopUser from './components/popups/PopUser/PopUser';
+import React from "react";
+import AppRoutes from "./components/AppRoutes";
 
 function App() {
-  return (
-    <div className="wrapper">
-      {/* Модальные окна */}
-      <PopBrowse />
-      <PopNewCard />
-      {/* Основной контент */}
-      <Header />
-      <Main />
-    </div>
-  );
+  return <AppRoutes />;
 }
 
 export default App;

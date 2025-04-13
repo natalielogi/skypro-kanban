@@ -17,6 +17,25 @@ import {
 } from "./calendar.styled";
 
 const Calendar = () => {
+  const daysInMonth = 30;
+  const startDay = 5; 
+  const days = [];
+
+  for (let i = 0; i < startDay; i++) {
+    days.push({ day: 31 - (startDay - i - 1), otherMonth: true });
+  }
+
+  for (let i = 1; i <= daysInMonth; i++) {
+    days.push({ day: i, otherMonth: false });
+  }
+
+  const remainingDays = 7 - (days.length % 7);
+  if (remainingDays < 7) {
+    for (let i = 1; i <= remainingDays; i++) {
+      days.push({ day: i, otherMonth: true });
+    }
+  }
+
   return (
     <CalendarWrapper>
       <CalendarTitle>Даты</CalendarTitle>
@@ -57,16 +76,15 @@ const Calendar = () => {
             <DayName>вс</DayName>
           </DayNames>
           <CalendarCells>
-            {/* Пример ячеек календаря */}
-            <CalendarCell $otherMonth>28</CalendarCell>
-            <CalendarCell $otherMonth>29</CalendarCell>
-            <CalendarCell $otherMonth>30</CalendarCell>
-            <CalendarCell $cellDay>31</CalendarCell>
-            <CalendarCell $cellDay>1</CalendarCell>
-            <CalendarCell $cellDay>2</CalendarCell>
-            <CalendarCell $cellDay>3</CalendarCell>
-            <CalendarCell $cellDay>4</CalendarCell>
-            {/* ... остальные ячейки ... */}
+            {days.map(({ day, otherMonth }, index) => (
+              <CalendarCell
+                key={index}
+                $otherMonth={otherMonth}
+                $cellDay={!otherMonth}
+              >
+                {day}
+              </CalendarCell>
+            ))}
           </CalendarCells>
         </CalendarContent>
         <input type="hidden" id="datepick_value" value="08.09.2023" />
