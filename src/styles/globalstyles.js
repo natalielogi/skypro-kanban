@@ -1,29 +1,42 @@
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
-*:before,
-*:after {
-  box-sizing: border-box;
-}
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-a,
-a:visited {
-  text-decoration: none;
-  cursor: pointer;
-}
+  *::before,
+  *::after {
+    box-sizing: inherit;
+  }
 
-button,
-._btn {
-  cursor: pointer;
-  outline: none;
-}
+  html, body {
+    width: 100%;
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
+    background-color: #eaeef6;
+  }
 
-ul li {
-  list-style: none;
-}`;
+  a {
+    text-decoration: none;
+    cursor: pointer;
+    color: inherit;
+  }
+
+  button {
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  input, textarea {
+    font-family: 'Roboto', sans-serif;
+  }
+`;
