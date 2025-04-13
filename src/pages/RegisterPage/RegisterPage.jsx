@@ -61,7 +61,7 @@ const RegisterPage = () => {
               <S.ButtonSignUp type="submit">Зарегистрироваться</S.ButtonSignUp>
               <S.FormGroup>
                 <p>
-                  Уже есть аккаунт? <Link href="/login">Войдите здесь</Link>
+                  Уже есть аккаунт? <Link to="/login">Войдите здесь</Link>
                 </p>
               </S.FormGroup>
             </S.Form>
