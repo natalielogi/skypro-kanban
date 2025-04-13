@@ -7,15 +7,10 @@ const PopUser = forwardRef(({ onClose }, ref) => {
       id="user-set-target"
       ref={ref}
     >
-      <a
-        href=""
-        onClick={(e) => {
-          e.preventDefault();
-          onClose();
-        }}
-      >
+      <button type="button" onClick={onClose}>
         x
-      </a>
+      </button>
+
       <p className="pop-user-set__name">Ivan Ivanov</p>
       <p className="pop-user-set__mail">ivan.ivanov@gmail.com</p>
       <div className="pop-user-set__theme">
@@ -23,7 +18,7 @@ const PopUser = forwardRef(({ onClose }, ref) => {
         <input type="checkbox" className="checkbox" name="checkbox" />
       </div>
       <button type="button" className="_hover03" onClick={onClose}>
-        <a href="#popExit">Выйти</a>
+        Выйти
       </button>
     </div>
   );

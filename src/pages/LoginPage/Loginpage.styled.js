@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -126,7 +127,7 @@ export const FormGroup = styled.div`
   }
 `;
 
-export const Link = styled.a`
+export const StyledRouterLink = styled(Link)`
   color: rgba(148, 166, 190, 0.4);
   cursor: pointer;
 `;

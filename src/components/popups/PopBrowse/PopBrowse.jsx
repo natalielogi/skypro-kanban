@@ -63,33 +63,33 @@ const PopBrowse = () => {
             <div className="pop-browse__btn-browse">
               <div className="btn-group">
                 <button className="btn-browse__edit _btn-bor _hover03">
-                  <a href="#">Редактировать задачу</a>
+                  Редактировать задачу
                 </button>
                 <button className="btn-browse__delete _btn-bor _hover03">
-                  <a href="#">Удалить задачу</a>
+                  Удалить задачу
                 </button>
               </div>
               <button className="btn-browse__close _btn-bg _hover01">
-                <a href="#">Закрыть</a>
+                Закрыть
               </button>
             </div>
             <div className="pop-browse__btn-edit _hide">
               <div className="btn-group">
                 <button className="btn-edit__edit _btn-bg _hover01">
-                  <a href="#">Сохранить</a>
+                  Сохранить
                 </button>
                 <button className="btn-edit__edit _btn-bor _hover03">
-                  <a href="#">Отменить</a>
+                  Отменить
                 </button>
                 <button
                   className="btn-edit__delete _btn-bor _hover03"
                   id="btnDelete"
                 >
-                  <a href="#">Удалить задачу</a>
+                  Удалить задачу
                 </button>
               </div>
               <button className="btn-edit__close _btn-bg _hover01">
-                <a href="#">Закрыть</a>
+                Закрыть
               </button>
             </div>
           </div>

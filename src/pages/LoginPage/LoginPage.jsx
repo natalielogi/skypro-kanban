@@ -1,7 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import * as S from "../LoginPage/Loginpage.styled";
-import { useState } from 'react';
+import { StyledRouterLink } from "../LoginPage/Loginpage.styled";
+import { useState } from "react";
 
 const LoginPage = ({ setIsAuth }) => {
   const [email, setEmail] = useState("");
@@ -40,7 +41,9 @@ const LoginPage = ({ setIsAuth }) => {
               <S.ButtonEnter type="submit">Войти</S.ButtonEnter>
               <S.FormGroup>
                 <p>Нужно зарегистрироваться?</p>
-                <S.Link href="/register">Регистрируйтесь здесь</S.Link>
+                <StyledRouterLink to="/register">
+                  Регистрируйтесь здесь
+                </StyledRouterLink>
               </S.FormGroup>
             </S.Form>
           </S.ModalBlock>

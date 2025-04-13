@@ -8,28 +8,34 @@ import {
   CardContent,
   CardTitile,
   CardDate,
-} from "./card.styled"
+} from "./card.styled";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const Card = ({ topic, title, date }) => {
+const Card = ({ id, topic, title, date }) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/card/${id}`);
+  };
+
   return (
-    <CardWrapper>
+    <CardWrapper onClick={handleClick}>
       <Cards>
         <CardGroup>
           <CardTheme $topic={topic}>
             <p>{topic}</p>
           </CardTheme>
-          <a href="#popBrowse" target="_self">
-            <CardBtn>
-              <div></div>
-              <div></div>
-              <div></div>
-            </CardBtn>
-          </a>
+          <CardBtn>
+            <div></div>
+            <div></div>
+            <div></div>
+          </CardBtn>
         </CardGroup>
         <CardContent>
-          <a href="" target="_blank">
+          <Link to={`/card/${id}`}>
             <CardTitile>{title}</CardTitile>
-          </a>
+          </Link>
           <CardDate>
             <svg
               xmlns="http://www.w3.org/2000/svg"
