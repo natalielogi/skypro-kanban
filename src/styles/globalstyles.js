@@ -22,4 +22,8 @@ button,
 ._btn {
   cursor: pointer;
   outline: none;
+}
+
+ul li {
+  list-style: none;
 }`;

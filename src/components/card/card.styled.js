@@ -40,7 +40,7 @@ export const CardGroup = styled.div`
   justify-content: space-between;
 `;
 
-const topicClass = {
+const topicclassName = {
   "Web Design": {
     background: "#FFE4C2",
     color: "#FF6D00",
@@ -66,9 +66,9 @@ export const CardTheme = styled.div`
   border-radius: 18px;
 
   background-color: ${({ $topic }) =>
-    topicClass[$topic]?.background || topicClass.default.background};
+    topicclassName[$topic]?.background || topicclassName.default.background};
   color: ${({ $topic }) =>
-    topicClass[$topic]?.color || topicClass.default.color};
+    topicclassName[$topic]?.color || topicclassName.default.color};
 
   p {
     font-size: 10px;
