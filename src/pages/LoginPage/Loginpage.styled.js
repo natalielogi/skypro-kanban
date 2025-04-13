@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   overflow-x: hidden;
@@ -8,14 +8,14 @@ const Wrapper = styled.div`
   background-color: #eaeef6;
 `;
 
-const ContainerSignin = styled.div`
+export const ContainerSignin = styled.div`
   display: block;
   width: 100vw;
   min-height: 100vh;
   margin: 0 auto;
 `;
 
-const Modal = styled.div`
+export const Modal = styled.div`
   width: 100%;
   height: 100%;
   min-width: 320px;
@@ -26,7 +26,7 @@ const Modal = styled.div`
   justify-content: center;
 `;
 
-const ModalBlock = styled.div`
+export const ModalBlock = styled.div`
   display: block;
   margin: 0 auto;
   background-color: #ffffff;
@@ -45,7 +45,7 @@ const ModalBlock = styled.div`
   }
 `;
 
-const ModalTitle = styled.div`
+export const ModalTitle = styled.div`
   h2 {
     text-align: center;
     font-size: 20px;
@@ -56,7 +56,7 @@ const ModalTitle = styled.div`
   }
 `;
 
-const Form = styled.form`
+export const Form = styled.form`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -64,7 +64,7 @@ const Form = styled.form`
   justify-content: center;
 `;
 
-const Input = styled.input`
+export const Input = styled.input`
   width: 100%;
   min-width: 100%;
   border-radius: 8px;
@@ -81,7 +81,7 @@ const Input = styled.input`
   }
 `;
 
-const ButtonEnter = styled.button`
+export const ButtonEnter = styled.button`
   width: 100%;
   height: 30px;
   background-color: #565eef;
@@ -109,7 +109,7 @@ const ButtonEnter = styled.button`
   }
 `;
 
-const FormGroup = styled.div`
+export const FormGroup = styled.div`
   text-align: center;
 
   p,
@@ -126,7 +126,7 @@ const FormGroup = styled.div`
   }
 `;
 
-const Link = styled.a`
+export const Link = styled.a`
   color: rgba(148, 166, 190, 0.4);
   cursor: pointer;
 `;
