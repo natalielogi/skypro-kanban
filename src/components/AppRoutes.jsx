@@ -2,14 +2,16 @@ import LoginPage from "../pages/LoginPage/LoginPage";
 import RegisterPage from "../pages/RegisterPage/RegisterPage";
 import CardPage from "../pages/CardPage";
 import AddTaskPage from "../pages/AddTaskPage";
-import ExitModal from "../pages/ExitModal";
+import ExitModal from "../pages/ExitModal/ExitModal";
 import NotFoundPage from "../pages/NotFoundPage";
 import MainPage from "../pages/MainPage";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { useState } from "react";
 
 function AppRoutes() {
-  const [isAuth, setIsAuth] = useState(false);
+  const [isAuth, setIsAuth] = useState(() => {
+    return localStorage.getItem("isAuth") === "true";
+  });
 
   const ProtectedRoute = ({ children }) => {
     if (!isAuth) return <Navigate to="/login" replace />;

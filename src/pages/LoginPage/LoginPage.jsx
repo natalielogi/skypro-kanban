@@ -12,6 +12,7 @@ const LoginPage = ({ setIsAuth }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsAuth(true);
+    localStorage.setItem("isAuth", "true");
     navigate("/");
   };
 
