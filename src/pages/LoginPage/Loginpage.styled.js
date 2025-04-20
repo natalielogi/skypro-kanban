@@ -80,29 +80,35 @@ export const Input = styled.input`
   &::placeholder {
     color: #94a6be;
   }
+
+  border: ${(props) =>
+    props.$invalid ? "1px solid red" : "0.7px solid rgba(148, 166, 190, 0.4)"};
+
+  &:focus {
+    outline: none;
+    border-color: #565eef;
+  }
 `;
 
 export const ButtonEnter = styled.button`
   width: 100%;
   height: 30px;
-  background-color: #565eef;
-  border-radius: 4px;
   margin-top: 20px;
   margin-bottom: 20px;
   border: none;
-  outline: none;
+  border-radius: 4px;
+  background-color: ${({ disabled }) => (disabled ? "#ccc" : "#565eef")};
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
-  line-height: 21px;
-  font-weight: 500;
-  letter-spacing: -0.14px;
-  color: #ffffff;
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
 
   &:hover {
-    background-color: #33399b;
+    background-color: ${({ disabled }) => (disabled ? "#ccc" : "#33399b")};
   }
 
   @media screen and (max-width: 375px) {
@@ -130,4 +136,13 @@ export const FormGroup = styled.div`
 export const StyledRouterLink = styled(Link)`
   color: rgba(148, 166, 190, 0.4);
   cursor: pointer;
+`;
+
+export const ErrorText = styled.p`
+  color: rgb(248, 77, 77);
+  font-family: Arial;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 150%;
+  text-align: center;
 `;
