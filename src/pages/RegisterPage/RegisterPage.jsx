@@ -10,6 +10,10 @@ const RegisterPage = () => {
     email: "",
     password: "",
   });
+  const [errorMessage, setErrorMessage] = useState("");
+  const [touched, setTouched] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showErrors, setShowErrors] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -18,11 +22,33 @@ const RegisterPage = () => {
       ...prev,
       [name]: value,
     }));
+    setTouched((prev) => ({
+      ...prev,
+      [name]: true,
+    }));
+    setErrorMessage("");
   };
+
+  const isFormValid = formData.name && formData.email && formData.password;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setShowErrors(true);
+    setTouched({
+      name: true,
+      email: true,
+      password: true,
+    });
+
+    if (!isFormValid) {
+      setErrorMessage(
+        "Введенные вами данные не корректны. Чтобы завершить регистрацию, заполните все поля в форме."
+      );
+      return;
+    }
+
     try {
+      setIsSubmitting(true);
       await signUp({
         login: formData.email,
         name: formData.name,
@@ -30,7 +56,11 @@ const RegisterPage = () => {
       });
       navigate("/login");
     } catch (error) {
-      alert(error.message); 
+      setErrorMessage(
+        "Введенные вами данные не корректны. Чтобы завершить регистрацию, введите данные корректно и повторите попытку."
+      );
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -49,7 +79,7 @@ const RegisterPage = () => {
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="Имя"
-                required
+                $invalid={showErrors && !formData.name}
               />
               <S.Input
                 type="email"
@@ -57,7 +87,7 @@ const RegisterPage = () => {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="Эл. почта"
-                required
+                $invalid={showErrors && !formData.email}
               />
               <S.Input
                 type="password"
@@ -65,9 +95,15 @@ const RegisterPage = () => {
                 value={formData.password}
                 onChange={handleChange}
                 placeholder="Пароль"
-                required
+                $invalid={showErrors && !formData.password}
               />
-              <S.ButtonSignUp type="submit">Зарегистрироваться</S.ButtonSignUp>
+              {errorMessage && <S.ErrorText>{errorMessage}</S.ErrorText>}
+              <S.ButtonSignUp
+                type="submit"
+                disabled={isSubmitting || (showErrors && !isFormValid)}
+              >
+                Зарегистрироваться
+              </S.ButtonSignUp>
               <S.FormGroup>
                 <p>
                   Уже есть аккаунт? <Link to="/login">Войдите здесь</Link>
