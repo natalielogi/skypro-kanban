@@ -16,6 +16,9 @@ export async function signIn({ login, password }) {
         },
       }
     );
+    localStorage.setItem("userName", response.data.user.name);
+    localStorage.setItem("userEmail", response.data.user.login);
+    localStorage.setItem("token", response.data.token);
     return response.data;
   } catch (error) {
     throw new Error(error.response?.data?.error || "Ошибка входа");

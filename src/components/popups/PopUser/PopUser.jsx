@@ -1,12 +1,15 @@
 import React, { forwardRef } from "react";
 import { useNavigate } from "react-router-dom";
 
-const PopUser = forwardRef(({ onClose }, ref) => {
+const PopUser = forwardRef(({ onClose, userName }, ref) => {
   const navigate = useNavigate();
   const handleLogoutClick = () => {
+    localStorage.clear();
     onClose();
     navigate("/exit");
   };
+
+  const userEmail = localStorage.getItem("userEmail") || "example@mail.com";
 
   return (
     <div
@@ -18,8 +21,8 @@ const PopUser = forwardRef(({ onClose }, ref) => {
         x
       </button>
 
-      <p className="pop-user-set__name">Ivan Ivanov</p>
-      <p className="pop-user-set__mail">ivan.ivanov@gmail.com</p>
+      <p className="pop-user-set__name">{userName}</p>
+      <p className="pop-user-set__mail">{userEmail}</p>
       <div className="pop-user-set__theme">
         <p>Темная тема</p>
         <input type="checkbox" className="checkbox" name="checkbox" />
