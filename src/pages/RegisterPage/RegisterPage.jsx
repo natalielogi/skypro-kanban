@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as S from "./RegisterPage.styled";
 import { Link } from "react-router-dom";
+import { signUp } from "../../services/auth.js";
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
@@ -19,10 +20,18 @@ const RegisterPage = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Регистрация:", formData);
-    navigate("/login");
+    try {
+      await signUp({
+        login: formData.email,
+        name: formData.name,
+        password: formData.password,
+      });
+      navigate("/login");
+    } catch (error) {
+      alert(error.message); 
+    }
   };
 
   return (
