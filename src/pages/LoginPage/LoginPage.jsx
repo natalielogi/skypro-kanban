@@ -3,17 +3,25 @@ import { useNavigate } from "react-router-dom";
 import * as S from "../LoginPage/Loginpage.styled";
 import { StyledRouterLink } from "../LoginPage/Loginpage.styled";
 import { useState } from "react";
+import { singIn } from "../../services/auth.js";
 
 const LoginPage = ({ setIsAuth }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsAuth(true);
-    localStorage.setItem("isAuth", "true");
-    navigate("/");
+    try {
+      const { user, token } = await singIn({ login: email, password });
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("isAuth", "true");
+      setIsAuth(true);
+      navigate("/");
+    } catch (error) {
+      alert(error.message);
+    }
   };
 
   return (
