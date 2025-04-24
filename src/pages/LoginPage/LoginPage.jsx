@@ -2,10 +2,12 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import * as S from "../LoginPage/Loginpage.styled";
 import { StyledRouterLink } from "../LoginPage/Loginpage.styled";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { signIn } from "../../services/auth.js";
+import { AuthContext } from "../../context/authContext";
 
-const LoginPage = ({ setIsAuth }) => {
+const LoginPage = () => {
+  const { login: loginContext } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [touched, setTouched] = useState({});
@@ -37,10 +39,7 @@ const LoginPage = ({ setIsAuth }) => {
     try {
       setIsSubmitting(true);
       const { user, token } = await signIn({ login: email, password });
-      localStorage.setItem("token", token);
-      localStorage.setItem("user", JSON.stringify(user));
-      localStorage.setItem("isAuth", "true");
-      setIsAuth(true);
+      loginContext({ user, token });
       navigate("/");
     } catch (error) {
       setErrorMessage("Неверный email или пароль. Попробуйте снова.");
