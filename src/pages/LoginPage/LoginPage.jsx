@@ -3,17 +3,50 @@ import { useNavigate } from "react-router-dom";
 import * as S from "../LoginPage/Loginpage.styled";
 import { StyledRouterLink } from "../LoginPage/Loginpage.styled";
 import { useState } from "react";
+import { signIn } from "../../services/auth.js";
 
 const LoginPage = ({ setIsAuth }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [touched, setTouched] = useState({});
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showErrors, setShowErrors] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    if (name === "email") setEmail(value);
+    if (name === "password") setPassword(value);
+
+    setTouched((prev) => ({ ...prev, [name]: true }));
+    setErrorMessage("");
+  };
+
+  const isFormValid = email && password;
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsAuth(true);
-    localStorage.setItem("isAuth", "true");
-    navigate("/");
+    setShowErrors(true);
+    if (!isFormValid) {
+      setErrorMessage("Пожалуйста, заполните все поля, чтобы войти в аккаунт.");
+      return;
+    }
+
+    try {
+      setIsSubmitting(true);
+      const { user, token } = await signIn({ login: email, password });
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("isAuth", "true");
+      setIsAuth(true);
+      navigate("/");
+    } catch (error) {
+      setErrorMessage("Неверный email или пароль. Попробуйте снова.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -27,19 +60,27 @@ const LoginPage = ({ setIsAuth }) => {
             <S.Form onSubmit={handleSubmit}>
               <S.Input
                 type="email"
+                name="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={handleChange}
                 placeholder="Эл. почта"
-                required
+                $invalid={showErrors && touched.email && !email}
               />
               <S.Input
                 type="password"
+                name="password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={handleChange}
                 placeholder="Пароль"
-                required
+                $invalid={showErrors && touched.password && !password}
               />
-              <S.ButtonEnter type="submit">Войти</S.ButtonEnter>
+              {errorMessage && <S.ErrorText>{errorMessage}</S.ErrorText>}
+              <S.ButtonEnter
+                type="submit"
+                disabled={isSubmitting || (showErrors && !isFormValid)}
+              >
+                Войти
+              </S.ButtonEnter>
               <S.FormGroup>
                 <p>Нужно зарегистрироваться?</p>
                 <StyledRouterLink to="/register">

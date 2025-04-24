@@ -72,7 +72,6 @@ export const Input = styled.input`
   width: 100%;
   min-width: 100%;
   border-radius: 8px;
-  border: 0.7px solid rgba(148, 166, 190, 0.4);
   outline: none;
   padding: 10px 8px;
   margin-bottom: 7px;
@@ -82,6 +81,16 @@ export const Input = styled.input`
 
   &::placeholder {
     color: #94a6be;
+  }
+
+  border: ${(props) =>
+    props.$invalid
+      ? "1px solid rgb(248, 77, 77)" // красный
+      : "0.7px solid rgba(148, 166, 190, 0.4)"}; // серый по макету
+
+  &:focus {
+    outline: none;
+    border-color: #565eef;
   }
 `;
 
@@ -111,6 +120,13 @@ export const ButtonSignUp = styled.button`
   @media screen and (max-width: 375px) {
     height: 40px;
   }
+
+  background-color: ${({ disabled }) => (disabled ? "#ccc" : "#565eef")};
+  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
+
+  &:hover {
+    background-color: ${({ disabled }) => (disabled ? "#ccc" : "#33399b")};
+  }
 `;
 
 export const FormGroup = styled.div`
@@ -130,4 +146,13 @@ export const Link = styled.a`
   text-decoration: underline;
   color: rgba(148, 166, 190, 0.4);
   cursor: pointer;
+`;
+
+export const ErrorText = styled.p`
+  color: rgb(248, 77, 77);
+  font-family: Arial;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 150%;
+  text-align: center;
 `;

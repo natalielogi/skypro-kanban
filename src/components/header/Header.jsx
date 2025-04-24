@@ -18,6 +18,8 @@ const Header = () => {
   const modalref = useRef(null);
   const navigate = useNavigate();
 
+  const userName = localStorage.getItem("userName") || "Пользователь";
+
   const handleCreateTaskClick = () => {
     navigate("/add-task");
   };
@@ -61,8 +63,14 @@ const Header = () => {
             <BtnMainNew id="btnMainNew" onClick={handleCreateTaskClick}>
               Создать новую задачу
             </BtnMainNew>
-            <UserLink onClick={toggleUserModal}>Ivan Ivanov</UserLink>
-            {isUserVisible && <PopUser ref={modalref} onClose={closeModal} />}
+            <UserLink onClick={toggleUserModal}>{userName}</UserLink>
+            {isUserVisible && (
+              <PopUser
+                ref={modalref}
+                onClose={closeModal}
+                userName={userName}
+              />
+            )}
           </Nav>
         </HeaderBlock>
       </Container>
