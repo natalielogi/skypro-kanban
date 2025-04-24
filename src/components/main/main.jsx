@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Column from "../Column/Column";
-import { cardList } from "../../data";
 import {
   MainWrapper,
   MainContainer,
@@ -8,6 +7,7 @@ import {
   MainBlock,
   MainContent,
 } from "./main.styled";
+import { TaskContext } from "../../context/taskContext.js";
 
 const columnTitles = [
   "Без статуса",
@@ -18,6 +18,7 @@ const columnTitles = [
 ];
 
 const Main = () => {
+  const { tasks } = useContext(TaskContext);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -40,7 +41,7 @@ const Main = () => {
                 <Column
                   key={title}
                   title={title}
-                  cards={cardList.filter((card) => card.status === title)}
+                  cards={tasks.filter((card) => card.status === title)}
                 />
               ))}
             </MainContent>
