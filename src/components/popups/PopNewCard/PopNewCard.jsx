@@ -1,9 +1,37 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import Calendar from "../../Calendar/calendar";
 import { useNavigate } from "react-router-dom";
+import { TaskContext } from "../../../context/taskContext.js";
 
 const PopNewCard = () => {
+  const { addTask } = useContext(TaskContext);
   const navigate = useNavigate();
+
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("Web Design");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!title.trim()) return;
+
+    const newTask = {
+      id: Date.now(),
+      title,
+      description,
+      topic: category,
+      date: new Date().toLocaleString("ru-RU"),
+      status: "Без статуса",
+    };
+
+    addTask(newTask);
+    navigate("/");
+  };
+
+  const handleCategoryClick = (newCategory) => {
+    setCategory(newCategory);
+  };
 
   return (
     <div className="pop-new-card" id="popNewCard">
@@ -27,8 +55,7 @@ const PopNewCard = () => {
             <div className="pop-new-card__wrap">
               <form
                 className="pop-new-card__form form-new"
-                id="formNewCard"
-                action="#"
+                onSubmit={handleSubmit}
               >
                 <div className="form-new__block">
                   <label htmlFor="formTitle" className="subttl">
@@ -37,9 +64,10 @@ const PopNewCard = () => {
                   <input
                     className="form-new__input"
                     type="text"
-                    name="name"
                     id="formTitle"
                     placeholder="Введите название задачи..."
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
                     autoFocus
                   />
                 </div>
@@ -49,9 +77,10 @@ const PopNewCard = () => {
                   </label>
                   <textarea
                     className="form-new__area"
-                    name="text"
                     id="textArea"
                     placeholder="Введите описание задачи..."
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
                   ></textarea>
                 </div>
               </form>
@@ -60,17 +89,24 @@ const PopNewCard = () => {
             <div className="pop-new-card__categories categories">
               <p className="categories__p subttl">Категория</p>
               <div className="categories__themes">
-                <div className="categories__theme _orange _active-category">
-                  <p className="_orange">Web Design</p>
-                </div>
-                <div className="categories__theme _green">
-                  <p className="_green">Research</p>
-                </div>
-                <div className="categories__theme _purple">
-                  <p className="_purple">Copywriting</p>
-                </div>
+                {["Web Design", "Research", "Copywriting"].map((cat) => (
+                  <div
+                    key={cat}
+                    className={`categories__theme _${cat
+                      .toLowerCase()
+                      .replace(" ", "")} ${
+                      category === cat ? "_active-category" : ""
+                    }`}
+                    onClick={() => handleCategoryClick(cat)}
+                  >
+                    <p className={`_${cat.toLowerCase().replace(" ", "")}`}>
+                      {cat}
+                    </p>
+                  </div>
+                ))}
               </div>
             </div>
+
             <button className="form-new__create _hover01" id="btnCreate">
               Создать задачу
             </button>

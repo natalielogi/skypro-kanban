@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import PopUser from "../popups/PopUser/PopUser";
 import {
   Headerwrapper,
@@ -12,13 +12,15 @@ import {
 } from "./Header.styled";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/authContext";
 
 const Header = () => {
   const [isUserVisible, setIsUserVisible] = useState(false);
   const modalref = useRef(null);
   const navigate = useNavigate();
 
-  const userName = localStorage.getItem("userName") || "Пользователь";
+  const { user } = useContext(AuthContext);
+  const userName = user?.name || "Пользователь";
 
   const handleCreateTaskClick = () => {
     navigate("/add-task");
