@@ -61,21 +61,6 @@ export const Title = styled.h3`
   margin-bottom: 20px;
 `;
 
-export const CloseButton = styled.button`
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  color: #94a6be;
-  cursor: pointer;
-  font-size: 20px;
-  background: transparent;
-  border: none;
-
-  &:hover {
-    color: #000000;
-  }
-`;
-
 export const Wrap = styled.div`
   display: flex;
   align-items: flex-start;
@@ -94,5 +79,124 @@ export const Form = styled.form`
 
   @media screen and (max-width: 495px) {
     max-width: 100%;
+  }
+`;
+
+export const FormBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const Label = styled.label`
+  color: #000;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+`;
+
+export const Input = styled.input`
+  width: 100%;
+  outline: none;
+  padding: 14px;
+  background: transparent;
+  border: 0.7px solid rgba(148, 166, 190, 0.4);
+  border-radius: 8px;
+  font-size: 14px;
+  letter-spacing: -0.14px;
+  margin: 20px 0;
+
+  &::placeholder {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1px;
+    color: #94a6be;
+    letter-spacing: -0.14px;
+  }
+`;
+
+export const Textarea = styled.textarea`
+  width: 100%;
+  max-width: 370px;
+  height: 200px;
+  padding: 14px;
+  background: transparent;
+  border: 0.7px solid rgba(148, 166, 190, 0.4);
+  border-radius: 8px;
+  font-size: 14px;
+  letter-spacing: -0.14px;
+
+  &::placeholder {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1px;
+    color: #94a6be;
+    letter-spacing: -0.14px;
+  }
+
+  @media screen and (max-width: 495px) {
+    max-width: 100%;
+    height: 34px;
+  }
+`;
+
+export const CategorySection = styled.div`
+  margin-bottom: 20px;
+`;
+
+export const CategoryLabel = styled.p`
+  margin-bottom: 14px;
+  color: #000;
+  font-size: 14px;
+  font-weight: 600;
+`;
+
+export const CategoryThemes = styled.div`
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+`;
+
+export const CategoryItem = styled.div`
+  display: inline-block;
+  width: auto;
+  height: 30px;
+  padding: 8px 20px;
+  border-radius: 24px;
+  margin-right: 7px;
+  opacity: ${(props) => (props.active ? 1 : 0.4)};
+  background-color: ${(props) => props.bg || "#eee"};
+  color: ${(props) => props.color || "#000"};
+  cursor: pointer;
+
+  p {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 14px;
+    white-space: nowrap;
+  }
+`;
+
+export const CreateButton = styled.button`
+  width: 132px;
+  height: 30px;
+  background-color: #565eef;
+  border-radius: 4px;
+  border: 0;
+  outline: none;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  color: #ffffff;
+  float: right;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #33399b;
+  }
+
+  @media screen and (max-width: 495px) {
+    width: 100%;
+    height: 40px;
   }
 `;
