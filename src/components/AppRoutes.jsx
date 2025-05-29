@@ -1,7 +1,6 @@
 import LoginPage from "../pages/LoginPage/LoginPage";
 import RegisterPage from "../pages/RegisterPage/RegisterPage";
 import CardPage from "../pages/CardPage";
-import AddTaskPage from "../pages/AddTaskPage";
 import ExitModal from "../pages/ExitModal/ExitModal";
 import NotFoundPage from "../pages/NotFoundPage";
 import MainPage from "../pages/MainPage";
@@ -36,16 +35,6 @@ function AppRoutes() {
         element={
           <ProtectedRoute>
             <CardPage />
-          </ProtectedRoute>
-        }
-      />
-
-      {/* Добавление задачи */}
-      <Route
-        path="/add-task"
-        element={
-          <ProtectedRoute>
-            <AddTaskPage />
           </ProtectedRoute>
         }
       />

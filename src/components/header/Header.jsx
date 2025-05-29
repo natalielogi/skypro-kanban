@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import PopUser from "../popups/PopUser/PopUser";
+import PopNewCard from "../popups/PopNewCard/PopNewCard";
 import {
   Headerwrapper,
   Container,
@@ -10,19 +11,14 @@ import {
   BtnMainNew,
   UserLink,
 } from "./Header.styled";
-import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 const Header = () => {
   const [isUserVisible, setIsUserVisible] = useState(false);
+  const [isNewTaskVisible, setIsNewTaskVisible] = useState(false);
   const modalref = useRef(null);
-  const navigate = useNavigate();
 
   const userName = localStorage.getItem("userName") || "Пользователь";
-
-  const handleCreateTaskClick = () => {
-    navigate("/add-task");
-  };
 
   const toggleUserModal = (e) => {
     e.preventDefault();
@@ -60,7 +56,7 @@ const Header = () => {
             <img src="images/logo_dark.png" alt="logo" />
           </LogoLinkDark>
           <Nav>
-            <BtnMainNew id="btnMainNew" onClick={handleCreateTaskClick}>
+            <BtnMainNew onClick={() => setIsNewTaskVisible(true)}>
               Создать новую задачу
             </BtnMainNew>
             <UserLink onClick={toggleUserModal}>{userName}</UserLink>
@@ -74,6 +70,9 @@ const Header = () => {
           </Nav>
         </HeaderBlock>
       </Container>
+      {isNewTaskVisible && (
+        <PopNewCard onClose={() => setIsNewTaskVisible(false)} />
+      )}
     </Headerwrapper>
   );
 };

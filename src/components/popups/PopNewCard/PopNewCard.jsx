@@ -1,31 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Calendar from "../../Calendar/calendar";
-import { useNavigate } from "react-router-dom";
+import * as S from "./PopNewCard.styled";
 
-const PopNewCard = () => {
-  const navigate = useNavigate();
+const PopNewCard = ({ onClose }) => {
+  useEffect(() => {
+    const handleEsc = (e) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", handleEsc);
+    return () => document.removeEventListener("keydown", handleEsc);
+  }, [onClose]);
 
   return (
-    <div className="pop-new-card" id="popNewCard">
-      <div className="pop-new-card__container">
-        <div className="pop-new-card__block">
-          <div className="pop-new-card__content">
-            <h3 className="pop-new-card__ttl">Создание задачи</h3>
-            <button
-              className="pop-new-card__close"
-              onClick={() => navigate("/")}
-              style={{
-                border: "none",
-                background: "transparent",
-                fontSize: "20px",
-                cursor: "pointer",
-              }}
-            >
+    <S.Wrapper className="pop-new-card" id="popNewCard">
+      <S.Container className="pop-new-card__container">
+        <S.Block className="pop-new-card__block">
+          <S.Content className="pop-new-card__content">
+            <S.Title className="pop-new-card__ttl">Создание задачи</S.Title>
+            <S.CloseButton className="pop-new-card__close" onClick={onClose}>
               &#10006;
-            </button>
+            </S.CloseButton>
 
-            <div className="pop-new-card__wrap">
-              <form
+            <S.Wrap className="pop-new-card__wrap">
+              <S.Form
                 className="pop-new-card__form form-new"
                 id="formNewCard"
                 action="#"
@@ -54,9 +51,9 @@ const PopNewCard = () => {
                     placeholder="Введите описание задачи..."
                   ></textarea>
                 </div>
-              </form>
+              </S.Form>
               <Calendar />
-            </div>
+            </S.Wrap>
             <div className="pop-new-card__categories categories">
               <p className="categories__p subttl">Категория</p>
               <div className="categories__themes">
@@ -74,10 +71,10 @@ const PopNewCard = () => {
             <button className="form-new__create _hover01" id="btnCreate">
               Создать задачу
             </button>
-          </div>
-        </div>
-      </div>
-    </div>
+          </S.Content>
+        </S.Block>
+      </S.Container>
+    </S.Wrapper>
   );
 };
 
