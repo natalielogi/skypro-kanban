@@ -1,5 +1,6 @@
 import React, { forwardRef } from "react";
 import { useNavigate } from "react-router-dom";
+import * as S from "./PopUser.styled";
 
 const PopUser = forwardRef(({ onClose, userName }, ref) => {
   const navigate = useNavigate();
@@ -12,25 +13,21 @@ const PopUser = forwardRef(({ onClose, userName }, ref) => {
   const userEmail = localStorage.getItem("userEmail") || "example@mail.com";
 
   return (
-    <div
-      className="header__pop-user-set pop-user-set"
-      id="user-set-target"
-      ref={ref}
-    >
-      <button type="button" onClick={onClose}>
+    <S.PopUserWrapper id="user-set-target" ref={ref}>
+      <S.CloseButton type="button" onClick={onClose}>
         x
-      </button>
+      </S.CloseButton>
 
-      <p className="pop-user-set__name">{userName}</p>
-      <p className="pop-user-set__mail">{userEmail}</p>
-      <div className="pop-user-set__theme">
+      <S.UserName>{userName}</S.UserName>
+      <S.UserEmail>{userEmail}</S.UserEmail>
+      <S.ThemeToggleBlock>
         <p>Темная тема</p>
         <input type="checkbox" className="checkbox" name="checkbox" />
-      </div>
-      <button type="button" className="_hover03" onClick={handleLogoutClick}>
+      </S.ThemeToggleBlock>
+      <S.LogoutButton type="button" onClick={handleLogoutClick}>
         Выйти
-      </button>
-    </div>
+      </S.LogoutButton>
+    </S.PopUserWrapper>
   );
 });
 
