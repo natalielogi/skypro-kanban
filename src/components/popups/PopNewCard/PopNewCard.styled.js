@@ -124,6 +124,7 @@ export const Textarea = styled.textarea`
   border-radius: 8px;
   font-size: 14px;
   letter-spacing: -0.14px;
+  margin-top: 20px;
 
   &::placeholder {
     font-weight: 400;

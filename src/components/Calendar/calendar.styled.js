@@ -1,29 +1,21 @@
 import styled from "styled-components";
 
 export const CalendarWrapper = styled.div`
-  max-width: 340px;
-  width: 100%;
-
+  width: 182px;
+  margin-bottom: 20px;
   @media screen and (max-width: 660px) {
     max-width: 340px;
     width: 100%;
   }
 `;
 
-const Subttl = styled.p`
+export const CalendarTitle = styled.p`
+  margin-bottom: 14px;
+  padding: 0 7px;
   color: #000;
   font-size: 14px;
   font-weight: 600;
   line-height: 1;
-`;
-
-export const CalendarTitle = styled(Subttl)`
-  margin-bottom: 14px;
-  padding: 0 7px;
-
-  @media screen and (max-width: 660px) {
-    padding: 0;
-  }
 `;
 
 export const CalendarBlock = styled.div`
@@ -37,7 +29,6 @@ export const CalendarNav = styled.div`
   justify-content: space-between;
   margin-top: 14px;
   padding: 0 7px;
-
   @media screen and (max-width: 660px) {
     padding: 0;
   }
@@ -63,7 +54,6 @@ export const NavAction = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
   svg {
     fill: #94a6be;
   }
@@ -88,7 +78,6 @@ export const DayName = styled.div`
   font-weight: 500;
   line-height: normal;
   letter-spacing: -0.2px;
-
   @media screen and (max-width: 660px) {
     font-size: 14px;
   }
@@ -99,12 +88,9 @@ export const CalendarCells = styled.div`
   height: 126px;
   display: flex;
   flex-wrap: wrap;
-
   @media screen and (max-width: 660px) {
     width: 344px;
     height: auto;
-    display: flex;
-    flex-wrap: wrap;
     justify-content: space-around;
   }
 `;
@@ -115,7 +101,6 @@ export const CalendarCell = styled.div`
   margin: 2px;
   border-radius: 50%;
   display: flex;
-  flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
   color: #94a6be;
@@ -123,13 +108,18 @@ export const CalendarCell = styled.div`
   line-height: 1;
   letter-spacing: -0.2px;
   cursor: pointer;
-  opacity: ${({ $otherMonth }) => $otherMonth && 0};
-
+  opacity: ${({ otherMonth }) => (otherMonth ? 0 : 1)};
   &:hover {
-    color: ${({ $cellDay }) => $cellDay && "#94a6be"};
-    background-color: ${({ $cellDay }) => $cellDay && "#eaeef6"};
+    background-color: #eaeef6;
+    color: #94a6be;
   }
-
+  &.active {
+    background-color: #94a6be;
+    color: #ffffff;
+  }
+  &.current {
+    font-weight: 700;
+  }
   @media screen and (max-width: 660px) {
     width: 42px;
     height: 42px;
@@ -139,22 +129,21 @@ export const CalendarCell = styled.div`
 
 export const CalendarPeriod = styled.div`
   padding: 0 7px;
-
   @media screen and (max-width: 660px) {
     padding: 0;
   }
 `;
 
 export const CalendarP = styled.p`
-  color: #94a6be;
+  color: #94A6BE;
   font-size: 10px;
   line-height: 1;
-
   span {
     color: #000000;
   }
-
   @media screen and (max-width: 660px) {
     font-size: 14px;
   }
 `;
+
+
