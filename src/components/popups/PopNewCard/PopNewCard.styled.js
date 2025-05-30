@@ -165,9 +165,9 @@ export const CategoryItem = styled.div`
   padding: 8px 20px;
   border-radius: 24px;
   margin-right: 7px;
-  opacity: ${(props) => (props.active ? 1 : 0.4)};
-  background-color: ${(props) => props.bg || "#eee"};
-  color: ${(props) => props.color || "#000"};
+  opacity: ${({ $active }) => ($active ? 1 : 0.4)};
+  background-color: ${({ $bg }) => $bg || "#eee"};
+  color: ${({ $color }) => $color || "#000"};
   cursor: pointer;
 
   p {

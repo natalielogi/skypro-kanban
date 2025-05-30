@@ -62,25 +62,25 @@ const PopNewCard = ({ onClose }) => {
               <S.CategoryLabel>Категория</S.CategoryLabel>
               <S.CategoryThemes>
                 <S.CategoryItem
-                  bg="#FFE4C2"
-                  color="#FF6D00"
-                  active={selectedCategory === "Web Design"}
+                  $bg="#FFE4C2"
+                  $color="#FF6D00"
+                  $active={selectedCategory === "Web Design"}
                   onClick={() => handleCategoryClick("Web Design")}
                 >
                   <p>Web Design</p>
                 </S.CategoryItem>
                 <S.CategoryItem
-                  bg="#B4FDD1"
-                  color="#06B16E"
-                  active={selectedCategory === "Research"}
+                  $bg="#B4FDD1"
+                  $color="#06B16E"
+                  $active={selectedCategory === "Research"}
                   onClick={() => handleCategoryClick("Research")}
                 >
                   <p>Research</p>
                 </S.CategoryItem>
                 <S.CategoryItem
-                  bg="#E9D4FF"
-                  color="#9A48F1"
-                  active={selectedCategory === "Copywriting"}
+                  $bg="#E9D4FF"
+                  $color="#9A48F1"
+                  $active={selectedCategory === "Copywriting"}
                   onClick={() => handleCategoryClick("Copywriting")}
                 >
                   <p>Copywriting</p>

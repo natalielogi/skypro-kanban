@@ -85,7 +85,6 @@ export const DayName = styled.div`
 
 export const CalendarCells = styled.div`
   width: 182px;
-  height: 126px;
   display: flex;
   flex-wrap: wrap;
   @media screen and (max-width: 660px) {
@@ -108,17 +107,15 @@ export const CalendarCell = styled.div`
   line-height: 1;
   letter-spacing: -0.2px;
   cursor: pointer;
-  opacity: ${({ otherMonth }) => (otherMonth ? 0 : 1)};
+  opacity: ${({ $empty }) => ($empty ? 0 : 1)};
+  font-weight: ${({ $current }) => ($current ? 700 : "normal")};
+  background-color: ${({ $selected }) =>
+    $selected ? "#94a6be" : "transparent"};
+  color: ${({ $selected }) => ($selected ? "#ffffff" : "#94a6be")};
+
   &:hover {
-    background-color: #eaeef6;
-    color: #94a6be;
-  }
-  &.active {
-    background-color: #94a6be;
-    color: #ffffff;
-  }
-  &.current {
-    font-weight: 700;
+    background-color: ${({ $empty }) => ($empty ? "transparent" : "#eaeef6")};
+    color: ${({ $empty }) => ($empty ? "#94a6be" : "#94a6be")};
   }
   @media screen and (max-width: 660px) {
     width: 42px;
@@ -135,7 +132,7 @@ export const CalendarPeriod = styled.div`
 `;
 
 export const CalendarP = styled.p`
-  color: #94A6BE;
+  color: #94a6be;
   font-size: 10px;
   line-height: 1;
   span {
@@ -145,5 +142,3 @@ export const CalendarP = styled.p`
     font-size: 14px;
   }
 `;
-
-
