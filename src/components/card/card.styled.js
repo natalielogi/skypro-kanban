@@ -5,6 +5,7 @@ export const CardWrapper = styled.div`
   animation-name: card-animation;
   animation-duration: 500ms;
   animation-timing-function: linear;
+  cursor: pointer;
 `;
 
 export const Cards = styled.div`
