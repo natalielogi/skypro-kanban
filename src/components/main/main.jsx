@@ -8,17 +8,12 @@ import {
   MainBlock,
   MainContent,
 } from "./main.styled";
-
-const columnTitles = [
-  "Без статуса",
-  "Необходимо сделать",
-  "В работе",
-  "Тестирование",
-  "Готово",
-];
+import { STATUSES } from "../../utils/constants.js";
+import PopBrowse from "../popups/PopBrowse/PopBrowse.jsx";
 
 const Main = () => {
   const [loading, setLoading] = useState(true);
+  const [selectedCard, setSelectedCard] = useState(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -36,15 +31,26 @@ const Main = () => {
         ) : (
           <MainBlock>
             <MainContent>
-              {columnTitles.map((title) => (
+              {STATUSES.map((title) => (
                 <Column
                   key={title}
                   title={title}
                   cards={cardList.filter((card) => card.status === title)}
+                  onCardClick={(card) => setSelectedCard(card)}
                 />
               ))}
             </MainContent>
           </MainBlock>
+        )}
+
+        {selectedCard && (
+          <PopBrowse
+            {...selectedCard}
+            onClose={() => setSelectedCard(null)}
+            onDelete={() => {
+              setSelectedCard(null);
+            }}
+          ></PopBrowse>
         )}
       </MainContainer>
     </MainWrapper>

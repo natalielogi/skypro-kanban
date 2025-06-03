@@ -1,6 +1,5 @@
 import LoginPage from "../pages/LoginPage/LoginPage";
 import RegisterPage from "../pages/RegisterPage/RegisterPage";
-import CardPage from "../pages/CardPage";
 import ExitModal from "../pages/ExitModal/ExitModal";
 import NotFoundPage from "../pages/NotFoundPage";
 import MainPage from "../pages/MainPage";
@@ -25,16 +24,6 @@ function AppRoutes() {
         element={
           <ProtectedRoute>
             <MainPage />
-          </ProtectedRoute>
-        }
-      />
-
-      {/* Страница карточки */}
-      <Route
-        path="/card/:id"
-        element={
-          <ProtectedRoute>
-            <CardPage />
           </ProtectedRoute>
         }
       />

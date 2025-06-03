@@ -1,8 +1,8 @@
 import React from "react";
-import Card from "../Card/Card";
+import Card from "../card/card";
 import { MainColumn, ColumnTitle, CardsWrapper } from "./column.styled";
 
-const Column = ({ title, cards }) => {
+const Column = ({ title, cards, onCardClick }) => {
   return (
     <MainColumn>
       <ColumnTitle>
@@ -10,14 +10,7 @@ const Column = ({ title, cards }) => {
       </ColumnTitle>
       <CardsWrapper>
         {cards.map((card) => (
-          <Card
-            key={card.id}
-            id={card.id}
-            topic={card.topic}
-            title={card.title}
-            date={card.date}
-            status={card.status}
-          />
+          <Card key={card.id} {...card} onClick={() => onCardClick(card)} />
         ))}
       </CardsWrapper>
     </MainColumn>

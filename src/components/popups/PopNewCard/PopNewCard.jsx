@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import Calendar from "../../Calendar/calendar";
 import * as S from "./PopNewCard.styled";
+import { TOPIC_STYLES } from "../../../utils/constants.js";
 
 const PopNewCard = ({ onClose }) => {
   const [selectedCategory, setSelectedCategory] = useState("Web Design");
@@ -61,30 +62,23 @@ const PopNewCard = ({ onClose }) => {
             <S.CategorySection>
               <S.CategoryLabel>Категория</S.CategoryLabel>
               <S.CategoryThemes>
-                <S.CategoryItem
-                  $bg="#FFE4C2"
-                  $color="#FF6D00"
-                  $active={selectedCategory === "Web Design"}
-                  onClick={() => handleCategoryClick("Web Design")}
-                >
-                  <p>Web Design</p>
-                </S.CategoryItem>
-                <S.CategoryItem
-                  $bg="#B4FDD1"
-                  $color="#06B16E"
-                  $active={selectedCategory === "Research"}
-                  onClick={() => handleCategoryClick("Research")}
-                >
-                  <p>Research</p>
-                </S.CategoryItem>
-                <S.CategoryItem
-                  $bg="#E9D4FF"
-                  $color="#9A48F1"
-                  $active={selectedCategory === "Copywriting"}
-                  onClick={() => handleCategoryClick("Copywriting")}
-                >
-                  <p>Copywriting</p>
-                </S.CategoryItem>
+                {Object.entries(TOPIC_STYLES).map(
+                  ([category, { background, color }]) => {
+                    if (category === "default") return null;
+
+                    return (
+                      <S.CategoryItem
+                        key={category}
+                        $bg={background}
+                        $color={color}
+                        $active={selectedCategory === category}
+                        onClick={() => handleCategoryClick(category)}
+                      >
+                        <p>{category}</p>
+                      </S.CategoryItem>
+                    );
+                  }
+                )}
               </S.CategoryThemes>
             </S.CategorySection>
             <S.CreateButton id="btnCreate">Создать задачу</S.CreateButton>
