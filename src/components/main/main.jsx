@@ -4,7 +4,6 @@ import { cardList } from "../../data";
 import {
   MainWrapper,
   MainContainer,
-  LoadingContainer,
   MainBlock,
   MainContent,
 } from "./main.styled";
@@ -26,22 +25,19 @@ const Main = () => {
   return (
     <MainWrapper>
       <MainContainer>
-        {loading ? (
-          <LoadingContainer>Данные загружаются</LoadingContainer>
-        ) : (
-          <MainBlock>
-            <MainContent>
-              {STATUSES.map((title) => (
-                <Column
-                  key={title}
-                  title={title}
-                  cards={cardList.filter((card) => card.status === title)}
-                  onCardClick={(card) => setSelectedCard(card)}
-                />
-              ))}
-            </MainContent>
-          </MainBlock>
-        )}
+        <MainBlock>
+          <MainContent>
+            {STATUSES.map((title) => (
+              <Column
+                key={title}
+                title={title}
+                cards={cardList.filter((card) => card.status === title)}
+                onCardClick={(card) => setSelectedCard(card)}
+                loading={loading}
+              />
+            ))}
+          </MainContent>
+        </MainBlock>
 
         {selectedCard && (
           <PopBrowse

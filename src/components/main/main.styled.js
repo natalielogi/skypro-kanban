@@ -8,15 +8,6 @@ export const MainWrapper = styled.main`
 
 export const MainContainer = styled(BaseContainer)``;
 
-export const LoadingContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  font-size: 24px;
-  color: #333;
-`;
-
 export const MainBlock = styled.div`
   width: 100%;
   margin: 0 auto;
