@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Column from "../Column/Column";
 import {
   MainWrapper,
@@ -12,7 +12,7 @@ import { useTaskContext } from "../../context/TaskContext.jsx";
 
 const Main = () => {
   const [selectedCard, setSelectedCard] = useState(null);
-  const { tasks } = useTaskContext();
+  const { tasks, updateTask } = useTaskContext();
 
   return (
     <MainWrapper>
@@ -34,11 +34,18 @@ const Main = () => {
         {selectedCard && (
           <PopBrowse
             id={selectedCard._id}
+            title={selectedCard.title}
+            topic={selectedCard.topic}
+            description={selectedCard.description}
+            status={selectedCard.status}
+            date={selectedCard.date}
             onClose={() => setSelectedCard(null)}
-            onDelete={() => {
+            onDelete={() => setSelectedCard(null)}
+            onSave={({ id, title, topic, description, status, date }) => {
+              updateTask(id, { title, topic, description, status, date });
               setSelectedCard(null);
             }}
-          ></PopBrowse>
+          />
         )}
       </MainContainer>
     </MainWrapper>

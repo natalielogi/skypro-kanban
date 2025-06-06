@@ -47,3 +47,17 @@ export const getTaskById = async (id) => {
     throw error;
   }
 };
+
+export const updateTask = async (id, taskData) => {
+  try {
+    const response = await api.put(`/kanban/${id}`, taskData, {
+      headers: {
+        "Content-Type": "",
+      },
+    });
+    return response.data.tasks;
+  } catch (error) {
+    console.error("Ошибка при обновлении задачи:", error);
+    throw error;
+  }
+};

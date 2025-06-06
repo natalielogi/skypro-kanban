@@ -52,6 +52,8 @@ const PopBrowse = ({ id, onClose, onDelete, onSave }) => {
   const handleSave = () => {
     onSave?.({
       id,
+      titile: task.titile,
+      topic: task.topic,
       description: editedDescription,
       status: editedStatus,
       date: editedDate,
