@@ -9,9 +9,13 @@ import {
   CardTitile,
   CardDate,
 } from "./card.styled";
-import PopBrowse from "../popups/PopBrowse/PopBrowse";
+import { format } from "date-fns";
 
 const Card = ({ topic, title, date, onClick }) => {
+  const formatDate = (iso) => {
+    if (!iso) return "";
+    return format(new Date(iso), "dd.MM.yy");
+  };
   return (
     <>
       <CardWrapper onClick={onClick}>
@@ -57,7 +61,7 @@ const Card = ({ topic, title, date, onClick }) => {
                   </clipPath>
                 </defs>
               </svg>
-              <p>{date}</p>
+              <p>{formatDate(date)}</p>
             </CardDate>
           </CardContent>
         </Cards>
