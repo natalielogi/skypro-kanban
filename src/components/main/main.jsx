@@ -12,7 +12,7 @@ import { useTaskContext } from "../../context/TaskContext.jsx";
 
 const Main = () => {
   const [selectedCard, setSelectedCard] = useState(null);
-  const { tasks, updateTask } = useTaskContext();
+  const { tasks, updateTask, deleteTask } = useTaskContext();
 
   return (
     <MainWrapper>
@@ -40,7 +40,10 @@ const Main = () => {
             status={selectedCard.status}
             date={selectedCard.date}
             onClose={() => setSelectedCard(null)}
-            onDelete={() => setSelectedCard(null)}
+            onDelete={(id) => {
+              deleteTask(id);
+              setSelectedCard(null);
+            }}
             onSave={({ id, title, topic, description, status, date }) => {
               updateTask(id, { title, topic, description, status, date });
               setSelectedCard(null);

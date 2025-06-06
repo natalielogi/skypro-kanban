@@ -5,6 +5,7 @@ import {
   getTasks,
   addTask as apiAddTask,
   updateTask as apiUpdateTask,
+  deleteTask as apiDeleteTask,
 } from "../services/api.js";
 
 const TaskContext = createContext();
@@ -39,12 +40,23 @@ export const TaskProvider = ({ children }) => {
     }
   };
 
+  const deleteTask = async (id) => {
+    try {
+      const updatedTasks = await apiDeleteTask(id);
+      setTasks(updatedTasks);
+    } catch (error) {
+      console.error("Ошибка при удалении задачи:", error);
+    }
+  };
+
   useEffect(() => {
     fetchTasks();
   }, []);
 
   return (
-    <TaskContext.Provider value={{ tasks, fetchTasks, addTask, updateTask }}>
+    <TaskContext.Provider
+      value={{ tasks, fetchTasks, addTask, updateTask, deleteTask }}
+    >
       {children}
     </TaskContext.Provider>
   );

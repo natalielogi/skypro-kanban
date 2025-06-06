@@ -61,3 +61,13 @@ export const updateTask = async (id, taskData) => {
     throw error;
   }
 };
+
+export const deleteTask = async (id) => {
+  try {
+    const response = await api.delete(`/kanban/${id}`);
+    return response.data.tasks;
+  } catch (error) {
+    console.error("Ошибка при удалении задачи:", error);
+    throw error;
+  }
+};
