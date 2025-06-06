@@ -2,10 +2,17 @@ import React, { useEffect, useState, useRef } from "react";
 import Calendar from "../../Calendar/calendar";
 import * as S from "./PopNewCard.styled";
 import { TOPIC_STYLES } from "../../../utils/constants.js";
+import { useTaskContext } from "../../../context/TaskContext";
 
 const PopNewCard = ({ onClose }) => {
-  const [selectedCategory, setSelectedCategory] = useState("Web Design");
+  const [selectedCategory, setSelectedCategory] = useState("Research");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [status] = useState("Без статуса");
+  const [date, setDate] = useState(null);
   const modalRef = useRef(null);
+  const { addTask } = useTaskContext();
+  
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
@@ -28,6 +35,27 @@ const PopNewCard = ({ onClose }) => {
     };
   }, [onClose]);
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const newTask = {
+      title: title || "Новая задача",
+      topic: selectedCategory || "Research",
+      status: status || "Без статуса",
+      description: description || "",
+      date: date || new Date().toISOString(),
+    };
+
+    console.log("Перед отправкой newTask:", newTask);
+
+    try {
+      await addTask(newTask);
+      onClose();
+    } catch (error) {
+      console.error("Ошибка при добавлении задачи:", error);
+    }
+  };
+
   return (
     <S.Wrapper id="popNewCard">
       <S.Container>
@@ -35,17 +63,17 @@ const PopNewCard = ({ onClose }) => {
           <S.Content>
             <S.Title>Создание задачи</S.Title>
             <S.Wrap>
-              <S.Form id="formNewCard" action="#">
+              <S.Form id="formNewCard" onSubmit={handleSubmit}>
                 <S.FormBlock>
-                  <S.Label htmlFor="formTitle" className="subttl">
-                    Название задачи
-                  </S.Label>
+                  <S.Label htmlFor="formTitle">Название задачи</S.Label>
                   <S.Input
                     type="text"
                     name="name"
                     id="formTitle"
                     placeholder="Введите название задачи..."
                     autoFocus
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
                   />
                 </S.FormBlock>
                 <S.FormBlock>
@@ -54,10 +82,12 @@ const PopNewCard = ({ onClose }) => {
                     name="text"
                     id="textArea"
                     placeholder="Введите описание задачи..."
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
                   ></S.Textarea>
                 </S.FormBlock>
               </S.Form>
-              <Calendar />
+              <Calendar setDate={setDate} />
             </S.Wrap>
             <S.CategorySection>
               <S.CategoryLabel>Категория</S.CategoryLabel>
@@ -81,7 +111,9 @@ const PopNewCard = ({ onClose }) => {
                 )}
               </S.CategoryThemes>
             </S.CategorySection>
-            <S.CreateButton id="btnCreate">Создать задачу</S.CreateButton>
+            <S.CreateButton id="btnCreate" type="submit" form="formNewCard">
+              Создать задачу
+            </S.CreateButton>
           </S.Content>
         </S.Block>
       </S.Container>

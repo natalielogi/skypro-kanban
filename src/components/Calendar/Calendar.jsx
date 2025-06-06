@@ -9,7 +9,7 @@ dayjs.extend(updateLocale);
 dayjs.extend(localizedFormat);
 dayjs.locale("ru");
 
-const Calendar = () => {
+const Calendar = ({ setDate }) => {
   const [selectedDate, setselectedDate] = useState(null);
   const [currentDate, setCurrentDate] = useState(dayjs());
 
@@ -32,6 +32,7 @@ const Calendar = () => {
     if (day) {
       const fullDate = currentDate.date(day);
       setselectedDate(fullDate);
+      setDate(fullDate.toISOString());
     }
   };
 

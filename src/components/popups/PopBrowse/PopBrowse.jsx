@@ -1,26 +1,36 @@
 import React, { useEffect, useRef, useState } from "react";
 import Calendar from "../../Calendar/calendar";
 import * as S from "./PopBrowse.styled";
-import { STATUSES } from "../../../utils/constants.js";
-import { TOPIC_STYLES } from "../../../utils/constants.js";
+import { STATUSES, TOPIC_STYLES } from "../../../utils/constants.js";
+import { getTaskById } from "../../../services/api.js";
 
-const PopBrowse = ({
-  id,
-  title,
-  topic,
-  description,
-  status,
-  date,
-  onClose,
-  onDelete,
-  onSave,
-}) => {
+const PopBrowse = ({ id, onClose, onDelete, onSave }) => {
   const modalRef = useRef(null);
+
+  const [task, setTask] = useState(null);
+  const [loading, setLoading] = useState(true);
+
   const [isEditMode, setIsEditMode] = useState(false);
-  const [editedDescription, setEditedDescription] = useState(description || "");
-  const [editedStatus, setEditedStatus] = useState(status || "Без статуса");
-  const [editedDate, setEditedDate] = useState(date || "");
-  const categoryStyle = TOPIC_STYLES[topic] || TOPIC_STYLES.default;
+  const [editedDescription, setEditedDescription] = useState("");
+  const [editedStatus, setEditedStatus] = useState("Без статуса");
+  const [editedDate, setEditedDate] = useState("");
+
+  useEffect(() => {
+    const fetchTask = async () => {
+      try {
+        const data = await getTaskById(id);
+        setTask(data);
+        setEditedDescription(data.description || "");
+        setEditedStatus(data.status || "Без статуса");
+        setEditedDate(data.date || "");
+      } catch (error) {
+        console.error("Ошибка при загрузке задачи:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchTask();
+  }, [id]);
 
   useEffect(() => {
     const handleEsc = (e) => {
@@ -50,25 +60,41 @@ const PopBrowse = ({
   };
 
   const hadleCancel = () => {
-    setEditedDescription(description || "");
-    setEditedStatus(status || "Без статуса");
-    setEditedDate(date || "");
+    if (!task) return;
+    setEditedDescription(task.description || "");
+    setEditedStatus(task.status || "Без статуса");
+    setEditedDate(task.date || "");
     setIsEditMode(false);
   };
 
+  if (loading || !task) {
+    return (
+      <S.PopBrowseWrapper>
+        <S.PopBrowseContainer>
+          <S.PopBrowseBlock ref={modalRef}>
+            <S.PopBrowseContent>
+              <p>Загрузка задачи...</p>
+            </S.PopBrowseContent>
+          </S.PopBrowseBlock>
+        </S.PopBrowseContainer>
+      </S.PopBrowseWrapper>
+    );
+  }
+
+  const categoryStyle = TOPIC_STYLES[task.topic] || TOPIC_STYLES.default;
   return (
     <S.PopBrowseWrapper>
       <S.PopBrowseContainer>
         <S.PopBrowseBlock ref={modalRef}>
           <S.PopBrowseContent>
             <S.TopBlock>
-              <S.Title>{title || "Название задачи"}</S.Title>
+              <S.Title>{task.title || "Название задачи"}</S.Title>
               <S.CategoryTheme
                 $bg={categoryStyle.background}
                 $color={categoryStyle.color}
                 $active
               >
-                <p>{topic || "Категория"}</p>
+                <p>{task.topic || "Категория"}</p>
               </S.CategoryTheme>
             </S.TopBlock>
             <S.Status>
@@ -121,7 +147,7 @@ const PopBrowse = ({
                 $color={categoryStyle.color}
                 $active
               >
-                <p>{topic || "Категория"}</p>
+                <p>{task.topic || "Категория"}</p>
               </S.CategoryTheme>
             </S.CategoryBlock>
             {!isEditMode ? (

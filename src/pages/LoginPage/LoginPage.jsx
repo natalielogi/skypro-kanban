@@ -36,9 +36,7 @@ const LoginPage = ({ setIsAuth }) => {
 
     try {
       setIsSubmitting(true);
-      const { user, token } = await signIn({ login: email, password });
-      localStorage.setItem("token", token);
-      localStorage.setItem("user", JSON.stringify(user));
+      await signIn({ login: email, password });
       localStorage.setItem("isAuth", "true");
       setIsAuth(true);
       navigate("/");

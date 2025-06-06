@@ -13,7 +13,7 @@ const Column = ({ title, cards, onCardClick, loading }) => {
         {loading
           ? [...Array(3)].map((_, i) => <SkeletonCard key={i} />)
           : cards.map((card) => (
-              <Card key={card.id} {...card} onClick={() => onCardClick(card)} />
+              <Card key={card._id} {...card} onClick={() => onCardClick(card)} />
             ))}
       </CardsWrapper>
     </MainColumn>
