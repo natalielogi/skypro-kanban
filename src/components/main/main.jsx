@@ -12,7 +12,7 @@ import { useTaskContext } from "../../context/TaskContext.jsx";
 
 const Main = () => {
   const [selectedCard, setSelectedCard] = useState(null);
-  const { tasks, updateTask, deleteTask } = useTaskContext();
+  const { tasks, updateTask, deleteTask, loading } = useTaskContext();
 
   return (
     <MainWrapper>
@@ -25,7 +25,7 @@ const Main = () => {
                 title={title}
                 cards={tasks.filter((card) => card.status === title)}
                 onCardClick={(card) => setSelectedCard(card)}
-                loading={false}
+                loading={loading}
               />
             ))}
           </MainContent>

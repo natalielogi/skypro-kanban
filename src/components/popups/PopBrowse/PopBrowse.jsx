@@ -8,7 +8,6 @@ const PopBrowse = ({ id, onClose, onDelete, onSave }) => {
   const modalRef = useRef(null);
 
   const [task, setTask] = useState(null);
-  const [loading, setLoading] = useState(true);
 
   const [isEditMode, setIsEditMode] = useState(false);
   const [editedDescription, setEditedDescription] = useState("");
@@ -25,8 +24,6 @@ const PopBrowse = ({ id, onClose, onDelete, onSave }) => {
         setEditedDate(data.date || "");
       } catch (error) {
         console.error("Ошибка при загрузке задачи:", error);
-      } finally {
-        setLoading(false);
       }
     };
     fetchTask();
@@ -69,19 +66,7 @@ const PopBrowse = ({ id, onClose, onDelete, onSave }) => {
     setIsEditMode(false);
   };
 
-  if (loading || !task) {
-    return (
-      <S.PopBrowseWrapper>
-        <S.PopBrowseContainer>
-          <S.PopBrowseBlock ref={modalRef}>
-            <S.PopBrowseContent>
-              <p>Загрузка задачи...</p>
-            </S.PopBrowseContent>
-          </S.PopBrowseBlock>
-        </S.PopBrowseContainer>
-      </S.PopBrowseWrapper>
-    );
-  }
+  if (!task) return null;
 
   const categoryStyle = TOPIC_STYLES[task.topic] || TOPIC_STYLES.default;
   return (

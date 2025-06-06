@@ -1,6 +1,12 @@
 /* eslint-disable react-refresh/only-export-components */
 
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import {
   getTasks,
   addTask as apiAddTask,
@@ -13,14 +19,18 @@ const TaskContext = createContext();
 export const TaskProvider = ({ children }) => {
   const [tasks, setTasks] = useState([]);
 
-  const fetchTasks = async () => {
+  const [loading, setLoading] = useState(true);
+
+  const fetchTasks = useCallback(async () => {
     try {
       const data = await getTasks();
       setTasks(data);
     } catch (error) {
       console.error("Ошибка при получении задач:", error);
+    } finally {
+      setLoading(false);
     }
-  };
+  }, []);
 
   const addTask = async (taskData) => {
     try {
@@ -51,11 +61,11 @@ export const TaskProvider = ({ children }) => {
 
   useEffect(() => {
     fetchTasks();
-  }, []);
+  }, [fetchTasks]);
 
   return (
     <TaskContext.Provider
-      value={{ tasks, fetchTasks, addTask, updateTask, deleteTask }}
+      value={{ tasks, fetchTasks, addTask, updateTask, deleteTask, loading }}
     >
       {children}
     </TaskContext.Provider>
