@@ -12,7 +12,6 @@ const PopNewCard = ({ onClose }) => {
   const [date, setDate] = useState(null);
   const modalRef = useRef(null);
   const { addTask } = useTaskContext();
-  
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
@@ -45,8 +44,6 @@ const PopNewCard = ({ onClose }) => {
       description: description || "",
       date: date || new Date().toISOString(),
     };
-
-    console.log("Перед отправкой newTask:", newTask);
 
     try {
       await addTask(newTask);

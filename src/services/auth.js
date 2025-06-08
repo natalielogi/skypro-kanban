@@ -22,9 +22,6 @@ export async function signIn({ login, password }) {
     localStorage.setItem("userEmail", user.login);
     localStorage.setItem("token", user.token);
 
-    console.log("Вход выполнен:", response.data);
-    console.log(user.token);
-
     return response.data;
   } catch (error) {
     throw new Error(error.response?.data?.error || "Ошибка входа");
@@ -44,7 +41,6 @@ export async function signUp({ login, name, password }) {
     localStorage.setItem("userName", user.name);
     localStorage.setItem("userEmail", user.login);
     localStorage.setItem("token", token);
-    console.log("Ответ от регистрации:", response.data);
 
     return response.data;
   } catch (error) {

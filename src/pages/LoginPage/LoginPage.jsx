@@ -24,7 +24,7 @@ const LoginPage = ({ setIsAuth }) => {
     setErrorMessage("");
   };
 
-  const isFormValid = email && password;
+  const isFormValid = email.trim() && password.trim();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,7 +40,7 @@ const LoginPage = ({ setIsAuth }) => {
       localStorage.setItem("isAuth", "true");
       setIsAuth(true);
       navigate("/");
-    } catch (error) {
+    } catch {
       setErrorMessage("Неверный email или пароль. Попробуйте снова.");
     } finally {
       setIsSubmitting(false);

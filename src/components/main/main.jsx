@@ -25,9 +25,7 @@ const Main = () => {
   const sensors = useSensors(useSensor(PointerSensor));
 
   const handleDragEnd = ({ active, over }) => {
-    console.log("▶️ Drag end");
-    console.log("👉 active.id:", active.id);
-    console.log("👉 over.id:", over?.id);
+
     if (!over || active.id === over.id) return;
 
     const draggedTask = tasks.find((t) => t._id === active.id);

@@ -29,7 +29,8 @@ const RegisterPage = () => {
     setErrorMessage("");
   };
 
-  const isFormValid = formData.name && formData.email && formData.password;
+  const isFormValid =
+    formData.name.trim() && formData.email.trim() && formData.password.trim();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -55,7 +56,7 @@ const RegisterPage = () => {
         password: formData.password,
       });
       navigate("/login");
-    } catch (error) {
+    } catch {
       setErrorMessage(
         "Введенные вами данные не корректны. Чтобы завершить регистрацию, введите данные корректно и повторите попытку."
       );
