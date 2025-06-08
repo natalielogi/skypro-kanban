@@ -1,21 +1,23 @@
 import React from "react";
 import Card from "../card/card";
-import { MainColumn, ColumnTitle, CardsWrapper } from "./column.styled";
+import {
+  StyledMainColumn as MainColumn,
+  ColumnTitle,
+  CardsWrapper,
+} from "./column.styled";
 import SkeletonCard from "../SkeletonCard";
+import { useDroppable } from "@dnd-kit/core";
 
-const Column = ({ title, cards, onCardClick, loading }) => {
+const Column = ({ title, children }) => {
+  const { setNodeRef } = useDroppable({
+    id: title,
+  });
   return (
-    <MainColumn>
+    <MainColumn ref={setNodeRef}>
       <ColumnTitle>
         <p>{title}</p>
       </ColumnTitle>
-      <CardsWrapper>
-        {loading
-          ? [...Array(3)].map((_, i) => <SkeletonCard key={i} />)
-          : cards.map((card) => (
-              <Card key={card._id} {...card} onClick={() => onCardClick(card)} />
-            ))}
-      </CardsWrapper>
+      <CardsWrapper>{children}</CardsWrapper>
     </MainColumn>
   );
 };

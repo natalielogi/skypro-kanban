@@ -8,27 +8,51 @@ import {
   CardContent,
   CardTitile,
   CardDate,
+  BtnWrapper,
+  Tooltip,
 } from "./card.styled";
 import { format } from "date-fns";
+import { useDraggable } from "@dnd-kit/core";
 
-const Card = ({ topic, title, date, onClick }) => {
+const Card = ({ topic, title, date, onClick, id }) => {
+  const { attributes, listeners, setNodeRef, transform, isDragging } =
+    useDraggable({ id });
+
+  const style = {
+    transform: transform
+      ? `translate3d(${transform.x}px, ${transform.y}px, 0)`
+      : undefined,
+    zIndex: isDragging ? 999 : 1,
+    opacity: isDragging ? 0.8 : 1,
+    cursor: "pointer",
+  };
+
   const formatDate = (iso) => {
     if (!iso) return "";
     return format(new Date(iso), "dd.MM.yy");
   };
   return (
     <>
-      <CardWrapper onClick={onClick}>
+      <CardWrapper ref={setNodeRef} style={style} onClick={onClick}>
         <Cards>
           <CardGroup>
             <CardTheme $topic={topic}>
               <p>{topic}</p>
             </CardTheme>
-            <CardBtn>
-              <div></div>
-              <div></div>
-              <div></div>
-            </CardBtn>
+            <BtnWrapper>
+              <CardBtn
+                {...attributes}
+                {...listeners}
+                onClick={(e) => e.stopPropagation()}
+                tabIndex={0}
+                aria-label="Перетащить"
+              >
+                <div></div>
+                <div></div>
+                <div></div>
+              </CardBtn>
+              <Tooltip>Перетащить</Tooltip>
+            </BtnWrapper>
           </CardGroup>
           <CardContent>
             <CardTitile>{title}</CardTitile>

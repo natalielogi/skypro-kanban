@@ -78,6 +78,33 @@ export const CardTheme = styled.div`
   }
 `;
 
+export const Tooltip = styled.div`
+  visibility: hidden;
+  opacity: 0;
+  background: #2e4765;
+  color: #fff;
+  text-align: center;
+  border-radius: 8px;
+  padding: 4px 10px;
+  position: absolute;
+  z-index: 99;
+  top: 30px;
+  right: 0;
+  font-size: 12px;
+  white-space: nowrap;
+  transition: opacity 0.15s;
+`;
+
+export const BtnWrapper = styled.div`
+  position: relative;
+  display: inline-block;
+
+  &:hover ${Tooltip} {
+    visibility: visible;
+    opacity: 1;
+  }
+`;
+
 export const CardBtn = styled.div`
   width: 24px;
   height: 24px;

@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import MainColumn from "./mainColumn";
 
-export const MainColumn = styled.div`
+export const StyledMainColumn = styled(MainColumn)`
   width: 20%;
   margin: 0 auto;
   display: block;
