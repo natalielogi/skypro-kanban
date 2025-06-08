@@ -3,6 +3,8 @@ import Calendar from "../../Calendar/calendar";
 import * as S from "./PopNewCard.styled";
 import { TOPIC_STYLES } from "../../../utils/constants.js";
 import { useTaskContext } from "../../../context/TaskContext";
+import { sanitizeInput } from "../../../utils/utils.js";
+import { ErrorText } from "../../../styles/globalstyles.js";
 
 const PopNewCard = ({ onClose }) => {
   const [selectedCategory, setSelectedCategory] = useState("Research");
@@ -12,6 +14,7 @@ const PopNewCard = ({ onClose }) => {
   const [date, setDate] = useState(null);
   const modalRef = useRef(null);
   const { addTask } = useTaskContext();
+  const [formError, setFormError] = useState("");
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
@@ -36,19 +39,37 @@ const PopNewCard = ({ onClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setFormError("");
+
+    if (!title.trim()) {
+      setFormError("Пожалуйста, введите название задачи.");
+      return;
+    }
+    if (!description.trim()) {
+      setFormError("Пожалуйста, введите описание задачи.");
+      return;
+    }
+    if (!date) {
+      setFormError("Пожалуйста, выберите дату задачи.");
+      return;
+    }
+
+    const cleanTitle = sanitizeInput(title.trim());
+    const cleanDescription = sanitizeInput(description.trim());
 
     const newTask = {
-      title: title || "Новая задача",
+      title: cleanTitle,
       topic: selectedCategory || "Research",
       status: status || "Без статуса",
-      description: description || "",
-      date: date || new Date().toISOString(),
+      description: cleanDescription,
+      date: date,
     };
 
     try {
       await addTask(newTask);
       onClose();
     } catch (error) {
+      setFormError("Ошибка при добавлении задачи. Попробуйте снова.");
       console.error("Ошибка при добавлении задачи:", error);
     }
   };
@@ -84,7 +105,7 @@ const PopNewCard = ({ onClose }) => {
                   ></S.Textarea>
                 </S.FormBlock>
               </S.Form>
-              <Calendar setDate={setDate} />
+              <Calendar value={date} onChange={setDate} readOnly={false} />
             </S.Wrap>
             <S.CategorySection>
               <S.CategoryLabel>Категория</S.CategoryLabel>
@@ -111,6 +132,11 @@ const PopNewCard = ({ onClose }) => {
             <S.CreateButton id="btnCreate" type="submit" form="formNewCard">
               Создать задачу
             </S.CreateButton>
+            {formError && (
+              <ErrorText style={{ marginTop: "12px", textAlign: "center" }}>
+                {formError}
+              </ErrorText>
+            )}
           </S.Content>
         </S.Block>
       </S.Container>

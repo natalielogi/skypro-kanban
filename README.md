@@ -1,12 +1,47 @@
-# React + Vite
+Основной функционал: 
+Регистрация и вход:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Валидация полей, невозможность войти/зарегистрироваться с пустыми полями или пробелами.
 
-Currently, two official plugins are available:
+Данные проходят санитайзинг (HTML-код не проходит).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Kanban-доска:
 
-## Expanding the ESLint configuration
+Колонки по статусам, задачи сортируются по статусу.
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Скелетоны (loader), если данные ещё грузятся.
+
+Сообщение "Нет задач" под названием колонки, если задач нет.
+
+Карточки:
+
+Отображение темы, названия, даты, статуса.
+
+Модальное окно с просмотром/редактированием задачи.
+
+Только валидные данные можно сохранить при редактировании.
+
+Нельзя добавить/отредактировать задачу без даты, категории или заполненных полей.
+
+Drag & Drop:
+
+Drag работает по всей карточке, открытие модалки — по кнопке с тремя точками.
+
+Перетаскивание между колонками меняет статус задачи.
+
+Дополнительные фичи: 
+
+Alerts и ошибки:
+
+Пользователь видит подсказку, если неправильно заполнил поля (без alert, а нормальный текст под формой).
+
+Валидация работает во всех формах (создание, редактирование, логин, регистрация).
+
+Санитайзинг:
+
+Все текстовые поля проходят очистку от потенциально вредного HTML.
+
+Потрачено времени:
+
+Примерно 40-50 часов (2 недели почти ежедневно по 3-4 часа).
+

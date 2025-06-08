@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as S from "./calendar.styled";
 import dayjs from "dayjs";
 import updateLocale from "dayjs/plugin/updateLocale";
@@ -9,16 +9,20 @@ dayjs.extend(updateLocale);
 dayjs.extend(localizedFormat);
 dayjs.locale("ru");
 
-const Calendar = ({ setDate }) => {
-  const [selectedDate, setselectedDate] = useState(null);
-  const [currentDate, setCurrentDate] = useState(dayjs());
+const Calendar = ({ value, onChange, readOnly }) => {
+  const selectedDate = value ? dayjs(value) : null;
+  const [currentDate, setCurrentDate] = useState(selectedDate || dayjs());
+
+  useEffect(() => {
+    if (selectedDate) setCurrentDate(selectedDate);
+  }, [value]);
+
+  const today = dayjs();
 
   const startOfMonth = currentDate.startOf("month");
   const endOfMonth = currentDate.endOf("month");
   const startDay = startOfMonth.day() === 0 ? 6 : startOfMonth.day() - 1;
   const daysInMonth = endOfMonth.date();
-
-  const today = dayjs();
 
   const days = [];
   for (let i = 0; i < startDay; i++) {
@@ -29,10 +33,9 @@ const Calendar = ({ setDate }) => {
   }
 
   const handleDateClick = (day) => {
-    if (day) {
+    if (day && !readOnly && onChange) {
       const fullDate = currentDate.date(day);
-      setselectedDate(fullDate);
-      setDate(fullDate.toISOString());
+      onChange(fullDate.toISOString());
     }
   };
 
@@ -42,7 +45,6 @@ const Calendar = ({ setDate }) => {
 
   const goToNextMonth = () => {
     setCurrentDate((prevDate) => prevDate.add(1, "month"));
-    setselectedDate(null);
   };
 
   return (

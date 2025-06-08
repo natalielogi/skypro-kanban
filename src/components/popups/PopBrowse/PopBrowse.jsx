@@ -3,6 +3,8 @@ import Calendar from "../../Calendar/calendar";
 import * as S from "./PopBrowse.styled";
 import { STATUSES, TOPIC_STYLES } from "../../../utils/constants.js";
 import { getTaskById } from "../../../services/api.js";
+import { sanitizeInput } from "../../../utils/utils.js";
+import { ErrorText } from "../../../styles/globalstyles.js";
 
 const PopBrowse = ({ id, onClose, onDelete, onSave }) => {
   const modalRef = useRef(null);
@@ -13,6 +15,7 @@ const PopBrowse = ({ id, onClose, onDelete, onSave }) => {
   const [editedDescription, setEditedDescription] = useState("");
   const [editedStatus, setEditedStatus] = useState("Без статуса");
   const [editedDate, setEditedDate] = useState("");
+  const [editError, setEditError] = useState("");
 
   useEffect(() => {
     const fetchTask = async () => {
@@ -47,15 +50,33 @@ const PopBrowse = ({ id, onClose, onDelete, onSave }) => {
   }, [onClose]);
 
   const handleSave = () => {
+    setEditError("");
+
+    if (!editedDescription.trim()) {
+      setEditError("Пожалуйста, введите описание задачи.");
+      return;
+    }
+    if (!editedDate) {
+      setEditError("Пожалуйста, выберите дату задачи.");
+      return;
+    }
+    if (!task.topic || task.topic === "default") {
+      setEditError("Пожалуйста, выберите категорию.");
+      return;
+    }
+
+    const cleanDescription = sanitizeInput(editedDescription.trim());
+
     onSave?.({
       id,
-      titile: task.titile,
+      title: task.title,
       topic: task.topic,
-      description: editedDescription,
+      description: cleanDescription,
       status: editedStatus,
       date: editedDate,
     });
     setIsEditMode(false);
+    setEditError("");
   };
 
   const hadleCancel = () => {
@@ -64,6 +85,7 @@ const PopBrowse = ({ id, onClose, onDelete, onSave }) => {
     setEditedStatus(task.status || "Без статуса");
     setEditedDate(task.date || "");
     setIsEditMode(false);
+    setEditError("");
   };
 
   if (!task) return null;
@@ -120,10 +142,8 @@ const PopBrowse = ({ id, onClose, onDelete, onSave }) => {
                 </S.FormBlock>
               </S.Form>
               <Calendar
-                selectedDate={editedDate}
-                onSelectDate={(date) =>
-                  isEditMode ? setEditedDate(date) : null
-                }
+                value={editedDate}
+                onChange={isEditMode ? setEditedDate : undefined}
                 readOnly={!isEditMode}
               />
             </S.Wrap>
@@ -163,6 +183,11 @@ const PopBrowse = ({ id, onClose, onDelete, onSave }) => {
                   </S.ButtonBorder>
                 </S.ButtonGroup>
                 <S.ButtonPrimary onClick={onClose}>Закрыть</S.ButtonPrimary>
+                {editError && (
+                  <ErrorText style={{ marginTop: "12px", textAlign: "center" }}>
+                    {editError}
+                  </ErrorText>
+                )}
               </S.ButtonBlock>
             )}
           </S.PopBrowseContent>

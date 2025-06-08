@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import * as S from "./RegisterPage.styled";
 import { Link } from "react-router-dom";
 import { signUp } from "../../services/auth.js";
+import { sanitizeInput } from "../../utils/utils.js";
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
@@ -41,7 +42,11 @@ const RegisterPage = () => {
       password: true,
     });
 
-    if (!isFormValid) {
+    const cleanName = sanitizeInput(formData.name.trim());
+    const cleanEmail = sanitizeInput(formData.email.trim());
+    const cleanPassword = sanitizeInput(formData.password.trim());
+
+    if (!cleanName || !cleanEmail || !cleanPassword) {
       setErrorMessage(
         "Введенные вами данные не корректны. Чтобы завершить регистрацию, заполните все поля в форме."
       );
@@ -51,9 +56,9 @@ const RegisterPage = () => {
     try {
       setIsSubmitting(true);
       await signUp({
-        login: formData.email,
-        name: formData.name,
-        password: formData.password,
+        login: cleanEmail,
+        name: cleanName,
+        password: cleanPassword,
       });
       navigate("/login");
     } catch {

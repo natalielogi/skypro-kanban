@@ -4,6 +4,7 @@ import * as S from "../LoginPage/Loginpage.styled";
 import { StyledRouterLink } from "../LoginPage/Loginpage.styled";
 import { useState } from "react";
 import { signIn } from "../../services/auth.js";
+import { sanitizeInput } from "../../utils/utils.js";
 
 const LoginPage = ({ setIsAuth }) => {
   const [email, setEmail] = useState("");
@@ -29,14 +30,18 @@ const LoginPage = ({ setIsAuth }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setShowErrors(true);
-    if (!isFormValid) {
+
+    const cleanEmail = sanitizeInput(email.trim());
+    const cleanPassword = sanitizeInput(password.trim());
+
+    if (!cleanEmail || !cleanPassword) {
       setErrorMessage("Пожалуйста, заполните все поля, чтобы войти в аккаунт.");
       return;
     }
 
     try {
       setIsSubmitting(true);
-      await signIn({ login: email, password });
+      await signIn({ login: cleanEmail, password: cleanPassword });
       localStorage.setItem("isAuth", "true");
       setIsAuth(true);
       navigate("/");

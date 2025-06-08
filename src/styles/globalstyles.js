@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
   * {
@@ -37,4 +37,14 @@ export const GlobalStyles = createGlobalStyle`
   input, textarea {
     font-family: 'Roboto', sans-serif;
   }
+`;
+
+export const ErrorText = styled.div`
+  color: #ff5454;
+  font-size: 13px;
+  margin-top: 8px;
+  text-align: left;
+  min-height: 18px;
+  font-weight: 400;
+  letter-spacing: 0.05em;
 `;

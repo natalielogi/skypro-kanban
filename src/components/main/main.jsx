@@ -5,6 +5,7 @@ import {
   MainContainer,
   MainBlock,
   MainContent,
+  NoTasksText,
 } from "./main.styled";
 import { STATUSES } from "../../utils/constants.js";
 import PopBrowse from "../popups/PopBrowse/PopBrowse.jsx";
@@ -25,7 +26,6 @@ const Main = () => {
   const sensors = useSensors(useSensor(PointerSensor));
 
   const handleDragEnd = ({ active, over }) => {
-
     if (!over || active.id === over.id) return;
 
     const draggedTask = tasks.find((t) => t._id === active.id);
@@ -45,13 +45,16 @@ const Main = () => {
         <MainBlock>
           <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
             <MainContent>
-              {STATUSES.map((status) => (
-                <Column key={status} title={status}>
-                  {loading
-                    ? [...Array(3)].map((_, i) => <SkeletonCard key={i} />)
-                    : tasks
-                        .filter((card) => card.status === status)
-                        .map((card) => (
+              {STATUSES.map((status) => {
+                const filtered = tasks.filter((card) => card.status === status);
+                return (
+                  <Column key={status} title={status}>
+                    {!loading && filtered.length === 0 && (
+                      <NoTasksText>Нет задач</NoTasksText>
+                    )}
+                    {loading
+                      ? [...Array(3)].map((_, i) => <SkeletonCard key={i} />)
+                      : filtered.map((card) => (
                           <Card
                             key={card._id}
                             id={card._id}
@@ -61,8 +64,9 @@ const Main = () => {
                             onClick={() => setSelectedCard(card)}
                           />
                         ))}
-                </Column>
-              ))}
+                  </Column>
+                );
+              })}
             </MainContent>
           </DndContext>
         </MainBlock>

@@ -28,3 +28,13 @@ export const MainContent = styled.div`
     display: block;
   }
 `;
+
+export const NoTasksText = styled.div`
+  color: #94a6be;
+  font-size: 14px;
+  font-weight: 500;
+  margin: 8px 0 0 14px;
+  text-align: left;
+  letter-spacing: 0.1px;
+  min-height: 20px;
+`;

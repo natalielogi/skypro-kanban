@@ -18,7 +18,6 @@ function AppRoutes() {
 
   return (
     <Routes>
-      {/* Главная страница (доска с карточками) */}
       <Route
         path="/"
         element={
@@ -28,7 +27,6 @@ function AppRoutes() {
         }
       />
 
-      {/* Выход */}
       <Route
         path="/exit"
         element={
@@ -38,13 +36,10 @@ function AppRoutes() {
         }
       />
 
-      {/* Авторизация */}
       <Route path="/login" element={<LoginPage setIsAuth={setIsAuth} />} />
 
-      {/* Регистрация */}
       <Route path="/register" element={<RegisterPage />} />
 
-      {/* Страница 404 */}
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );

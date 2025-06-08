@@ -85,8 +85,8 @@ export const Input = styled.input`
 
   border: ${(props) =>
     props.$invalid
-      ? "1px solid rgb(248, 77, 77)" // красный
-      : "0.7px solid rgba(148, 166, 190, 0.4)"}; // серый по макету
+      ? "1px solid rgb(248, 77, 77)" 
+      : "0.7px solid rgba(148, 166, 190, 0.4)"}; 
 
   &:focus {
     outline: none;
