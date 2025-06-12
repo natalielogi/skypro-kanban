@@ -4,6 +4,7 @@ import * as S from "./RegisterPage.styled";
 import { Link } from "react-router-dom";
 import { signUp } from "../../services/auth.js";
 import { sanitizeInput } from "../../utils/utils.js";
+import { toast } from "react-toastify";
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
@@ -60,8 +61,13 @@ const RegisterPage = () => {
         name: cleanName,
         password: cleanPassword,
       });
-      navigate("/login");
+
+      toast.success("Регистрация прошла успешно!");
+      setTimeout(() => navigate("/login"), 1500);
     } catch {
+      toast.error(
+        "Введенные вами данные некорректны. Пожалуйста, повторите попытку."
+      );
       setErrorMessage(
         "Введенные вами данные не корректны. Чтобы завершить регистрацию, введите данные корректно и повторите попытку."
       );
