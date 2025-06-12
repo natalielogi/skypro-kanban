@@ -12,6 +12,8 @@ import {
   UserLink,
 } from "./Header.styled";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useTaskContext } from "../../context/TaskContext";
 
 const Header = () => {
   const [isUserVisible, setIsUserVisible] = useState(false);
@@ -45,6 +47,15 @@ const Header = () => {
     };
   }, [isUserVisible]);
 
+  const { setTasks } = useTaskContext();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.clear();
+    setTasks([]);
+    navigate("/login");
+  };
+
   return (
     <Headerwrapper>
       <Container>
@@ -65,6 +76,7 @@ const Header = () => {
                 ref={modalref}
                 onClose={closeModal}
                 userName={userName}
+                onLogout={handleLogout}
               />
             )}
           </Nav>

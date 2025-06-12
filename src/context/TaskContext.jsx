@@ -62,7 +62,7 @@ export const TaskProvider = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      fetchTasks;
+      fetchTasks();
     } else {
       setLoading(false);
     }
@@ -70,7 +70,15 @@ export const TaskProvider = ({ children }) => {
 
   return (
     <TaskContext.Provider
-      value={{ tasks, fetchTasks, addTask, updateTask, deleteTask, loading }}
+      value={{
+        tasks,
+        setTasks,
+        fetchTasks,
+        addTask,
+        updateTask,
+        deleteTask,
+        loading,
+      }}
     >
       {children}
     </TaskContext.Provider>

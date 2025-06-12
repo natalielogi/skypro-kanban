@@ -1,13 +1,9 @@
 import React, { forwardRef } from "react";
-import { useNavigate } from "react-router-dom";
 import * as S from "./PopUser.styled";
 
-const PopUser = forwardRef(({ onClose, userName }, ref) => {
-  const navigate = useNavigate();
+const PopUser = forwardRef(({ onClose, userName, onLogout }, ref) => {
   const handleLogoutClick = () => {
-    localStorage.clear();
-    onClose();
-    navigate("/exit");
+    onLogout();
   };
 
   const userEmail = localStorage.getItem("userEmail") || "example@mail.com";

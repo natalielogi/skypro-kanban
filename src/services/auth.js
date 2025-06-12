@@ -52,8 +52,6 @@ export async function signUp({ login, name, password }) {
     localStorage.setItem("userEmail", user.login);
     localStorage.setItem("token", token);
 
-    console.log("signUp payload:", { login, name, password });
-
     return response.data;
   } catch (error) {
     throw new Error(error.response?.data?.error || "Ошибка регистрации");
