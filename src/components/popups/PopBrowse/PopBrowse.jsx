@@ -18,6 +18,7 @@ const PopBrowse = ({ id, onClose, onDelete, onSave }) => {
   const [editError, setEditError] = useState("");
 
   useEffect(() => {
+    console.log("🎯 useEffect в PopBrowse сработал");
     const fetchTask = async () => {
       try {
         const data = await getTaskById(id);

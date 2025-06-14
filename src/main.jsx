@@ -7,12 +7,12 @@ import { GlobalStyles } from "./styles/globalstyles.js";
 import { TaskProvider } from "./context/TaskContext";
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <BrowserRouter>
-      <TaskProvider>
-        <GlobalStyles />
-        <App />
-      </TaskProvider>
-    </BrowserRouter>
-  </StrictMode>
+  // <StrictMode>
+  <BrowserRouter>
+    <TaskProvider>
+      <GlobalStyles />
+      <App />
+    </TaskProvider>
+  </BrowserRouter>
+  // </StrictMode>
 );

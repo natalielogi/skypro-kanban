@@ -1,12 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, useCallback, useContext, useState } from "react";
 import {
   getTasks,
   addTask as apiAddTask,
@@ -58,15 +52,6 @@ export const TaskProvider = ({ children }) => {
       console.error("Ошибка при удалении задачи:", error);
     }
   };
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      fetchTasks();
-    } else {
-      setLoading(false);
-    }
-  }, [fetchTasks]);
 
   return (
     <TaskContext.Provider

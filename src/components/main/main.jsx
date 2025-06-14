@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Column from "../column/column.jsx";
 import {
   MainWrapper,
@@ -21,7 +21,8 @@ import Card from "../card/card.jsx";
 
 const Main = () => {
   const [selectedCard, setSelectedCard] = useState(null);
-  const { tasks, updateTask, deleteTask, loading } = useTaskContext();
+  const { tasks, updateTask, deleteTask, loading, fetchTasks } =
+    useTaskContext();
 
   const sensors = useSensors(useSensor(PointerSensor));
 
@@ -38,6 +39,10 @@ const Main = () => {
       });
     }
   };
+
+  useEffect(() => {
+    fetchTasks();
+  }, [fetchTasks]);
 
   return (
     <MainWrapper>

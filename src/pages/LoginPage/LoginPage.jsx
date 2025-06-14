@@ -5,7 +5,6 @@ import { StyledRouterLink } from "../LoginPage/Loginpage.styled";
 import { useState } from "react";
 import { signIn } from "../../services/auth.js";
 import { sanitizeInput } from "../../utils/utils.js";
-import { useTaskContext } from "../../context/TaskContext.jsx";
 
 const LoginPage = ({ setIsAuth }) => {
   const [email, setEmail] = useState("");
@@ -15,7 +14,6 @@ const LoginPage = ({ setIsAuth }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showErrors, setShowErrors] = useState(false);
   const navigate = useNavigate();
-  const { fetchTasks } = useTaskContext();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -46,7 +44,6 @@ const LoginPage = ({ setIsAuth }) => {
       await signIn({ login: cleanEmail, password: cleanPassword });
       localStorage.setItem("isAuth", "true");
       setIsAuth(true);
-      fetchTasks();
       navigate("/");
     } catch {
       setErrorMessage("Неверный email или пароль. Попробуйте снова.");
